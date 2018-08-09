@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_screen_text_size">24sp</dimen>
+    <dimen name="splash_screen_logo_dim">80dp</dimen>
+    <dimen name="splash_screen_items_elevation">2dp</dimen>
+</resources>

@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">@color/Brown_900</item>
+    </style>
+
+    <style name="SplashScreenTextStyle">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">@dimen/splash_screen_text_size</item>
+    </style>
+
+    <style name="SplashScreenLogoStyle">
+        <item name="android:layout_width">@dimen/splash_screen_logo_dim</item>
+        <item name="android:layout_height">@dimen/splash_screen_logo_dim</item>
+    </style>
+
 </resources>
