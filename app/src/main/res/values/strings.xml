@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">من ايدك أحلى</string>
     <string name="app_logo_cd">App Logo</string>
+    <string name="splash_screen_cd">Splash Screen</string>
+    <string name="title_activity_categories">CategoriesActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
