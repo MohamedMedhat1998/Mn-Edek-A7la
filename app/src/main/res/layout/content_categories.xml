@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CategoriesActivity"
+    android:background="@drawable/category_activity_background"
     tools:showIn="@layout/app_bar_categories">
 
     <android.support.v7.widget.RecyclerView

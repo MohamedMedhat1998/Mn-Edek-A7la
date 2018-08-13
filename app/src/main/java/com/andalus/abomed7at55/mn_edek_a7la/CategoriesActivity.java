@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -113,19 +114,35 @@ public class CategoriesActivity extends AppCompatActivity
 
     private void loadCategories(){
         List<FoodCategory> foodCategories = new ArrayList<>();
-        foodCategories.add(new FoodCategory(getString(R.string.meat),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.fish),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.sweet),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.juice),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.starches),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.appetizer),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.idea),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.diet),R.drawable.ic_menu_camera));
-        foodCategories.add(new FoodCategory(getString(R.string.bakery),R.drawable.ic_menu_camera));
+        foodCategories.add(new FoodCategory(getString(R.string.meat),R.drawable.chicken_hot_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.fish),R.drawable.fish_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.sweet),R.drawable.cake_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.juice),R.drawable.juice_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.starches),R.drawable.rice_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.appetizer),R.drawable.snack_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.idea),R.drawable.ligh_bulb_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.diet),R.drawable.diet_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.bakery),R.drawable.bread_icon));
+        foodCategories.add(new FoodCategory(getString(R.string.milk),R.drawable.milk_bottle_icon));
         //TODO to add more categories, add a new FoodCategory object to the above list
         CategoriesAdapter adapter = new CategoriesAdapter(foodCategories);
 
         rvCategories.setAdapter(adapter);
-        rvCategories.setLayoutManager(new GridLayoutManager(this,SPAN_COUNT, LinearLayoutManager.VERTICAL,false));
+        rvCategories.setLayoutManager(new GridLayoutManager(this,numberOfColumns(), LinearLayoutManager.VERTICAL,false));
+    }
+
+    /**
+     * This method is used to calculate the number of columns in the RecyclerView GridLayoutManager
+     * dynamically
+     * @return the suitable number of columns
+     */
+    private int numberOfColumns() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widthDivider = 400;
+        int width = displayMetrics.widthPixels;
+        int nColumns = width / widthDivider;
+        if (nColumns < 2) return 2;
+        return nColumns;
     }
 }
