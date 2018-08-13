@@ -9,4 +9,14 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="meat">لحوم</string>
+    <string name="fish">أسماك</string>
+    <string name="sweet">حلويات</string>
+    <string name="juice">عصائر</string>
+    <string name="starches">نشويات</string>
+    <string name="appetizer">مقبلات</string>
+    <string name="idea">أفكار وتدابير</string>
+    <string name="diet">دايت</string>
+    <string name="bakery">مخبوزات</string>
 </resources>
