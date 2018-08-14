@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnCategoryClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.R;
 
@@ -19,9 +20,11 @@ import butterknife.ButterKnife;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>{
 
     private List<FoodCategory> mData;
+    private OnCategoryClickListener mOnCategoryClickListener;
 
-    public CategoriesAdapter(List<FoodCategory> data){
+    public CategoriesAdapter(List<FoodCategory> data, OnCategoryClickListener onCategoryClickListener){
         mData = data;
+        mOnCategoryClickListener = onCategoryClickListener;
     }
 
     @NonNull
@@ -53,6 +56,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         CategoryHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnCategoryClickListener.onCategoryClicked(mData.get(getAdapterPosition()).getTag());
+                }
+            });
         }
     }
 }

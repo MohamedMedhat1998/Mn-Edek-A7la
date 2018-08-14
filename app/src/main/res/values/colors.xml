@@ -2,8 +2,13 @@
 <resources>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="Transparent">#00ffffff</color>
     <color name="White">#ffffff</color>
+    <color name="Black_Transparent">#61000000</color>
+    <color name="Black">#000000</color>
+
     <color name="Brown_900">#3E2723</color>
+
     <color name="Deep_Purple_50">#EDE7F6</color>
     <color name="Deep_Purple_100">#D1C4E9</color>
     <color name="Deep_Purple_300">#9575CD</color>

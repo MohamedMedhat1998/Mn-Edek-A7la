@@ -31,4 +31,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CategoryItemTextStyle">
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
 </resources>
