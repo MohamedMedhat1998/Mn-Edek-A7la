@@ -1,6 +1,7 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,14 +13,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.CategoriesAdapter;
+import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnCategoryClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.Measurements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +57,7 @@ public class CategoriesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         loadCategories();
+        testDatabase();
     }
 
     @Override
@@ -136,5 +141,28 @@ public class CategoriesActivity extends AppCompatActivity
         Intent recipesActivityIntent = new Intent(CategoriesActivity.this,RecipesActivity.class);
         recipesActivityIntent.putExtra(FoodCategory.TAG_KEY,tag);
         startActivity(recipesActivityIntent);
+    }
+
+    private void testDatabase(){
+        try {
+            AppDatabase.copyDatabase(this);
+            final AppDatabase appDatabase = AppDatabase.getInstance(this);
+            new AsyncTask<Object,Object,Object>(){
+
+                @Override
+                protected Object doInBackground(Object... objects) {
+                    Log.d("ID",appDatabase.getRecipeDao().getAllRecipes().get(0).getId() + "");
+                    Log.d("TITLE",appDatabase.getRecipeDao().getAllRecipes().get(0).getTitle());
+                    Log.d("INGREDIENTS",appDatabase.getRecipeDao().getAllRecipes().get(0).getIngredients());
+                    Log.d("STEPS",appDatabase.getRecipeDao().getAllRecipes().get(0).getSteps());
+                    Log.d("CATEGORY",appDatabase.getRecipeDao().getAllRecipes().get(0).getCategory());
+                    Log.d("PHOTO_LINK",appDatabase.getRecipeDao().getAllRecipes().get(0).getPhotoLink());
+                    Log.d("VIDEO_LINK",appDatabase.getRecipeDao().getAllRecipes().get(0).getVideoLink());
+                    return null;
+                }
+            }.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
