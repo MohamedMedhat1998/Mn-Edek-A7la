@@ -151,13 +151,15 @@ public class CategoriesActivity extends AppCompatActivity
 
                 @Override
                 protected Object doInBackground(Object... objects) {
-                    Log.d("ID",appDatabase.getRecipeDao().getAllRecipes().get(0).getId() + "");
-                    Log.d("TITLE",appDatabase.getRecipeDao().getAllRecipes().get(0).getTitle());
-                    Log.d("INGREDIENTS",appDatabase.getRecipeDao().getAllRecipes().get(0).getIngredients());
-                    Log.d("STEPS",appDatabase.getRecipeDao().getAllRecipes().get(0).getSteps());
-                    Log.d("CATEGORY",appDatabase.getRecipeDao().getAllRecipes().get(0).getCategory());
-                    Log.d("PHOTO_LINK",appDatabase.getRecipeDao().getAllRecipes().get(0).getPhotoLink());
-                    Log.d("VIDEO_LINK",appDatabase.getRecipeDao().getAllRecipes().get(0).getVideoLink());
+                    Log.d("SIZE OF CATEGORY",appDatabase.getRecipeDao().getRecipesByCategory("%" + FoodCategory.DIET_TAG + "%").size() + "");
+
+                    Log.d("SIZE OF SEARCH",appDatabase.getRecipeDao().getRecipesBySearchKeyword("%re%").size() + "");
+                    /*Log.d("TITLE",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getTitle());
+                    Log.d("INGREDIENTS",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getIngredients());
+                    Log.d("STEPS",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getSteps());
+                    Log.d("CATEGORY",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getCategory());
+                    Log.d("PHOTO_LINK",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getPhotoLink());
+                    Log.d("VIDEO_LINK",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getVideoLink());*/
                     return null;
                 }
             }.execute();

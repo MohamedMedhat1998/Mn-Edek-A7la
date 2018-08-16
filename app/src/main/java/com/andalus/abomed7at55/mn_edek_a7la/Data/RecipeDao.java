@@ -9,6 +9,11 @@ import java.util.List;
 
 @Dao
 public interface RecipeDao {
-    @Query("SELECT * FROM Recipe")
-    List<Recipe> getAllRecipes();
+
+    @Query("SELECT * FROM Recipe WHERE category LIKE :category")
+    List<Recipe> getRecipesByCategory(String category);
+
+    @Query("SELECT * FROM Recipe WHERE title Like :searchKeyword OR ingredients LIKE :searchKeyword OR steps LIKE :searchKeyword")
+    List<Recipe> getRecipesBySearchKeyword(String searchKeyword);
+
 }

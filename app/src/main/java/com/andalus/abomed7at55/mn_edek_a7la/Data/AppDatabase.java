@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-@Database(entities = {Recipe.class},version = 1)
+@Database(entities = {Recipe.class},version = 1 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     public static final String DATABASE_NAME = "Food.db";
