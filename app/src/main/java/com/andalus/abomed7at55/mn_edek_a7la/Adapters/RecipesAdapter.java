@@ -67,39 +67,29 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
 
     private int getPlaceHolderId(int position){
         int id = 0;
-        switch (mData.get(position).getCategory()){
-            case FoodCategory.MEAT_TAG:
-                id = R.drawable.chicken_hot_icon;
-                break;
-            case FoodCategory.FISH_TAG:
-                id = R.drawable.fish_icon;
-                break;
-            case FoodCategory.SWEET_TAG:
-                id = R.drawable.cake_icon;
-                break;
-            case FoodCategory.DRINK_TAG:
-                id = R.drawable.juice_icon;
-                break;
-            case FoodCategory.STARCHES_TAG:
-                id = R.drawable.rice_icon;
-                break;
-            case FoodCategory.APPETIZER_TAG:
-                id = R.drawable.snack_icon;
-                break;
-            case FoodCategory.IDEA_TAG:
-                id = R.drawable.ligh_bulb_icon;
-                break;
-            case FoodCategory.DIET_TAG:
-                id = R.drawable.diet_icon;
-                break;
-            case FoodCategory.BAKERY_TAG:
-                id = R.drawable.bread_icon;
-                break;
-            case FoodCategory.MILK_TAG:
-                id = R.drawable.milk_bottle_icon;
-                break;
-                //TODO if you added a category, add its placeholder icon here
+        String category = mData.get(position).getCategory();
+        if(category.contains(FoodCategory.MEAT_TAG)){
+            id = R.drawable.chicken_hot_icon;
+        } else if(category.contains(FoodCategory.FISH_TAG)){
+            id = R.drawable.fish_icon;
+        }else if(category.contains(FoodCategory.SWEET_TAG)){
+            id = R.drawable.cake_icon;
+        }else if(category.contains(FoodCategory.DRINK_TAG)){
+            id = R.drawable.juice_icon;
+        }else if(category.contains(FoodCategory.STARCHES_TAG)){
+            id = R.drawable.rice_icon;
+        }else if(category.contains(FoodCategory.APPETIZER_TAG)){
+            id = R.drawable.snack_icon;
+        }else if(category.contains(FoodCategory.IDEA_TAG)){
+            id = R.drawable.ligh_bulb_icon;
+        }else if(category.contains(FoodCategory.DIET_TAG)){
+            id = R.drawable.diet_icon;
+        }else if(category.contains(FoodCategory.BAKERY_TAG)){
+            id = R.drawable.bread_icon;
+        }else if(category.contains(FoodCategory.MILK_TAG)){
+            id = R.drawable.milk_bottle_icon;
         }
+        //TODO if you added a category, add its placeholder icon here
         return id;
     }
 }

@@ -1,14 +1,18 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Window;
 import android.widget.Toast;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.RecipesAdapter;
+import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.Measurements;
@@ -37,35 +41,27 @@ public class RecipesActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView(){
-        rvRecipes.setLayoutManager(new GridLayoutManager(this, Measurements.numberOfGridLayoutColumns(this), LinearLayoutManager.VERTICAL,false));
-        RecipesAdapter adapter;
-        List<Recipe> list = null;
         String tag = getIntent().getExtras().getString(FoodCategory.TAG_KEY);
-        switch (tag){
-            //TODO initialize the list in each case
-            case FoodCategory.MEAT_TAG:
-                break;
-            case FoodCategory.FISH_TAG:
-                break;
-            case FoodCategory.SWEET_TAG:
-                break;
-            case FoodCategory.DRINK_TAG:
-                break;
-            case FoodCategory.STARCHES_TAG:
-                break;
-            case FoodCategory.APPETIZER_TAG:
-                break;
-            case FoodCategory.IDEA_TAG:
-                break;
-            case FoodCategory.DIET_TAG:
-                break;
-            case FoodCategory.BAKERY_TAG:
-                break;
-            case FoodCategory.MILK_TAG:
-                break;
-            //TODO if you added a category, add its list here
+        AsyncList asyncList = new AsyncList();
+        rvRecipes.setHasFixedSize(true);
+        rvRecipes.setLayoutManager(new StaggeredGridLayoutManager(Measurements.numberOfGridLayoutColumns(this),LinearLayoutManager.VERTICAL));
+        asyncList.execute(tag);
+    }
+
+    private class AsyncList extends AsyncTask<String,Object,List<Recipe>>{
+
+        private RecipesAdapter mAdapter;
+
+        @Override
+        protected List<Recipe> doInBackground(String... strings) {
+            return AppDatabase.getInstance(getBaseContext()).getRecipeDao().getRecipesByCategory("%"+strings[0]+"%");
         }
-        adapter = new RecipesAdapter(list);
-        rvRecipes.setAdapter(adapter);
+
+        @Override
+        protected void onPostExecute(List<Recipe> recipes) {
+            super.onPostExecute(recipes);
+            mAdapter = new RecipesAdapter(recipes);
+            rvRecipes.setAdapter(mAdapter);
+        }
     }
 }
