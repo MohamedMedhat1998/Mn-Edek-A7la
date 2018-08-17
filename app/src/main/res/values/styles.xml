@@ -12,6 +12,15 @@
         <item name="colorPrimaryDark">@color/Brown_900</item>
     </style>
 
+    <style name="DetailsActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/Black</item>
+        <item name="colorPrimaryDark">@color/Black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="SplashScreenTextStyle">
         <item name="android:textColor">@color/White</item>
         <item name="android:textSize">@dimen/splash_screen_text_size</item>
@@ -34,6 +43,26 @@
     <style name="CategoryItemTextStyle">
         <item name="android:textColor">@color/Black</item>
         <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="DetailsActivityLabelStyle">
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="DetailsActivityNormalTextStyle">
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="DetailsActivitySeparatorStyle">
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_height">0.25dp</item>
+        <item name="android:background">@color/Black</item>
+        <item name="android:gravity">right</item>
     </style>
 
 </resources>

@@ -11,4 +11,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="category_icon_dim">50dp</dimen>
     <dimen name="category_card_dim">150dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="label_text_size">24sp</dimen>
+    <dimen name="normal_text_size">16sp</dimen>
 </resources>

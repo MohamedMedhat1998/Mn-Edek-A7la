@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.R;
+import com.andalus.abomed7at55.mn_edek_a7la.Utils.ImageUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -24,9 +26,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
 
     private List<Recipe> mData;
     private Context mContext;
+    private OnRecipeClickListener mOnRecipeClickListener;
 
-    public RecipesAdapter(List<Recipe> data){
+    public RecipesAdapter(List<Recipe> data, OnRecipeClickListener onRecipeClickListener){
         mData = data;
+        mOnRecipeClickListener = onRecipeClickListener;
     }
 
     @NonNull
@@ -43,7 +47,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         holder.tvRecipeItemTitle.setText(mData.get(position).getTitle());
         Glide.with(mContext)
                 .load(mData.get(position).getPhotoLink())
-                .apply(new RequestOptions().placeholder(getPlaceHolderId(position)))
+                .apply(new RequestOptions().placeholder(ImageUtils.getPlaceHolderId(mData.get(position).getCategory())))
                 .into(holder.ivRecipeItemMainImage);
     }
 
@@ -62,34 +66,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         RecipeItemHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnRecipeClickListener.onRecipeClicked(mData.get(getAdapterPosition()));
+                }
+            });
         }
-    }
-
-    private int getPlaceHolderId(int position){
-        int id = 0;
-        String category = mData.get(position).getCategory();
-        if(category.contains(FoodCategory.MEAT_TAG)){
-            id = R.drawable.chicken_hot_icon;
-        } else if(category.contains(FoodCategory.FISH_TAG)){
-            id = R.drawable.fish_icon;
-        }else if(category.contains(FoodCategory.SWEET_TAG)){
-            id = R.drawable.cake_icon;
-        }else if(category.contains(FoodCategory.DRINK_TAG)){
-            id = R.drawable.juice_icon;
-        }else if(category.contains(FoodCategory.STARCHES_TAG)){
-            id = R.drawable.rice_icon;
-        }else if(category.contains(FoodCategory.APPETIZER_TAG)){
-            id = R.drawable.snack_icon;
-        }else if(category.contains(FoodCategory.IDEA_TAG)){
-            id = R.drawable.ligh_bulb_icon;
-        }else if(category.contains(FoodCategory.DIET_TAG)){
-            id = R.drawable.diet_icon;
-        }else if(category.contains(FoodCategory.BAKERY_TAG)){
-            id = R.drawable.bread_icon;
-        }else if(category.contains(FoodCategory.MILK_TAG)){
-            id = R.drawable.milk_bottle_icon;
-        }
-        //TODO if you added a category, add its placeholder icon here
-        return id;
     }
 }

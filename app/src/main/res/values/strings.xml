@@ -20,4 +20,8 @@
     <string name="diet">دايت</string>
     <string name="bakery">مخبوزات</string>
     <string name="milk">ألبان</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="ingredients">المقادير :</string>
+    <string name="steps">الخطوات :</string>
+
 </resources>
