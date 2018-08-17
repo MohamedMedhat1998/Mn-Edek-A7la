@@ -45,24 +45,18 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
-    <style name="DetailsActivityLabelStyle">
-        <item name="android:textColor">@color/Black</item>
-        <item name="android:textSize">@dimen/label_text_size</item>
-        <item name="android:layout_margin">16dp</item>
-    </style>
-
-    <style name="DetailsActivityNormalTextStyle">
-        <item name="android:textColor">@color/Black</item>
-        <item name="android:textSize">@dimen/normal_text_size</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:gravity">right</item>
-    </style>
-
     <style name="DetailsActivitySeparatorStyle">
-        <item name="android:layout_margin">8dp</item>
         <item name="android:layout_height">0.25dp</item>
-        <item name="android:background">@color/Black</item>
+        <item name="android:background">@color/defaultTextColor</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">16dp</item>
         <item name="android:gravity">right</item>
+    </style>
+
+    <style name="DetailsActivityTextStyle">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
 </resources>

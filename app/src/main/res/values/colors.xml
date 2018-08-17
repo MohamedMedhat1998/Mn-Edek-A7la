@@ -2,6 +2,8 @@
 <resources>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="defaultTextColor">#808080</color>
+
     <color name="Transparent">#00ffffff</color>
     <color name="White">#ffffff</color>
     <color name="Black_Transparent">#61000000</color>

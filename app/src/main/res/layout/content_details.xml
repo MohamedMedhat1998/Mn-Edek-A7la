@@ -14,28 +14,34 @@
         android:layout_height="match_parent">
 
         <TextView
-            style="@style/DetailsActivityLabelStyle"
             android:text="@string/ingredients"
+            style="@style/DetailsActivityTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv_ingredients_details"
-            style="@style/DetailsActivityNormalTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
         <View
             android:layout_width="match_parent"
             style="@style/DetailsActivitySeparatorStyle" />
+
         <TextView
-            style="@style/DetailsActivityLabelStyle"
-            android:text="@string/steps"
+            android:id="@+id/tv_ingredients_details"
+            style="@style/DetailsActivityTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:text="@string/steps"
+            style="@style/DetailsActivityTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/DetailsActivitySeparatorStyle" />
+
+        <TextView
             android:id="@+id/tv_steps_details"
-            style="@style/DetailsActivityNormalTextStyle"
+            style="@style/DetailsActivityTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
