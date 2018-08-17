@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -57,7 +56,7 @@ public class CategoriesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         loadCategories();
-        testDatabase();
+        setUpDatabase();
     }
 
     @Override
@@ -143,26 +142,9 @@ public class CategoriesActivity extends AppCompatActivity
         startActivity(recipesActivityIntent);
     }
 
-    private void testDatabase(){
+    private void setUpDatabase(){
         try {
             AppDatabase.copyDatabase(this);
-            final AppDatabase appDatabase = AppDatabase.getInstance(this);
-            new AsyncTask<Object,Object,Object>(){
-
-                @Override
-                protected Object doInBackground(Object... objects) {
-                    Log.d("SIZE OF CATEGORY",appDatabase.getRecipeDao().getRecipesByCategory("%" + FoodCategory.DIET_TAG + "%").size() + "");
-
-                    Log.d("SIZE OF SEARCH",appDatabase.getRecipeDao().getRecipesBySearchKeyword("%re%").size() + "");
-                    /*Log.d("TITLE",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getTitle());
-                    Log.d("INGREDIENTS",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getIngredients());
-                    Log.d("STEPS",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getSteps());
-                    Log.d("CATEGORY",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getCategory());
-                    Log.d("PHOTO_LINK",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getPhotoLink());
-                    Log.d("VIDEO_LINK",appDatabase.getRecipeDao().getRecipesByCategory(FoodCategory.SWEET_TAG).get(0).getVideoLink());*/
-                    return null;
-                }
-            }.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }

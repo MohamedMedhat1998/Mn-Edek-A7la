@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.util.Log;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 
@@ -29,9 +30,14 @@ public abstract class AppDatabase extends RoomDatabase{
 
     public static void copyDatabase(Context context) throws IOException {
         final File outputFile = context.getDatabasePath(DATABASE_NAME);
+
         if(!outputFile.exists()){
             InputStream inputStream = context.getAssets().open(DATABASE_NAME);
-            OutputStream outputStream = new FileOutputStream(context.getDatabasePath(DATABASE_NAME));
+            File file = context.getFilesDir();
+            File databaseFolder = new File(file.getParent(),"databases");
+            databaseFolder.mkdirs();
+            File databaseFile = new File(databaseFolder.getAbsolutePath(),DATABASE_NAME);
+            OutputStream outputStream = new FileOutputStream(databaseFile);
 
             byte[] buffer = new byte[1024];
             int bufferSize;
