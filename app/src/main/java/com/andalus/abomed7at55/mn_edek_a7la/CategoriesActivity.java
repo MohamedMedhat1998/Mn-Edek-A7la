@@ -1,5 +1,6 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,15 +12,24 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.CategoriesAdapter;
+import com.andalus.abomed7at55.mn_edek_a7la.Adapters.RecipesAdapter;
 import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnCategoryClickListener;
+import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
+import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.Measurements;
 
 import java.io.IOException;
@@ -30,13 +40,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CategoriesActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnCategoryClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnCategoryClickListener, OnRecipeClickListener {
 
     @BindView(R.id.rv_categories)
     RecyclerView rvCategories;
 
     @BindView(R.id.rv_search_result)
     RecyclerView rvSearchResult;
+
+    @BindView(R.id.et_search_cat_act)
+    EditText etSearchCatAct;
+
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,8 @@ public class CategoriesActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+
+        mContext = this;
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,6 +75,7 @@ public class CategoriesActivity extends AppCompatActivity
 
         loadCategories();
         setUpDatabase();
+        setUpSearchProcess();
     }
 
     @Override
@@ -126,6 +144,81 @@ public class CategoriesActivity extends AppCompatActivity
             AppDatabase.copyDatabase(this);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setUpSearchProcess(){
+
+        rvSearchResult.setLayoutManager(new StaggeredGridLayoutManager(Measurements.numberOfGridLayoutColumns(this),LinearLayoutManager.VERTICAL));
+
+        etSearchCatAct.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() == 0){
+                    //search bar is empty TODO show categories rv
+                    showView(rvCategories);
+                    hideView(rvSearchResult);
+                }else{
+                    //search bar has some text TODO show search result rv. If there are no results, show "No Items" EditText
+                    hideView(rvCategories);
+                    showView(rvSearchResult);
+                    AsyncList asyncList = new AsyncList();
+                    asyncList.execute(charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void hideView(View view){
+        if(view.getVisibility() == View.VISIBLE){
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void showView(View view){
+        if(view.getVisibility() == View.INVISIBLE){
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onRecipeClicked(Recipe recipe) {
+        Intent detailsIntent = new Intent(this,DetailsActivity.class);
+        detailsIntent.putExtra(Recipe.COLUMN_ID,recipe.getId());
+        detailsIntent.putExtra(Recipe.COLUMN_TITLE,recipe.getTitle());
+        detailsIntent.putExtra(Recipe.COLUMN_INGREDIENTS,recipe.getIngredients());
+        detailsIntent.putExtra(Recipe.COLUMN_STEPS,recipe.getSteps());
+        detailsIntent.putExtra(Recipe.COLUMN_CATEGORY,recipe.getCategory());
+        detailsIntent.putExtra(Recipe.COLUMN_PHOTO_LINK,recipe.getPhotoLink());
+        detailsIntent.putExtra(Recipe.COLUMN_VIDEO_LINK,recipe.getVideoLink());
+        startActivity(detailsIntent);
+    }
+
+    private class AsyncList extends AsyncTask<String,Object,List<Recipe>>{
+
+        private RecipesAdapter mAdapter;
+
+        @Override
+        protected List<Recipe> doInBackground(String... strings) {
+            return AppDatabase.getInstance(getBaseContext()).getRecipeDao().getRecipesBySearchKeyword("%"+strings[0]+"%");
+        }
+
+        @Override
+        protected void onPostExecute(List<Recipe> recipes) {
+            super.onPostExecute(recipes);
+            mAdapter = new RecipesAdapter(recipes, (OnRecipeClickListener) mContext);
+            rvSearchResult.setAdapter(mAdapter);
         }
     }
 }

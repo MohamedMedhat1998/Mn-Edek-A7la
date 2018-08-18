@@ -47,7 +47,6 @@ public class RecipesActivity extends AppCompatActivity implements OnRecipeClickL
     private void setUpRecyclerView(){
         String tag = getIntent().getExtras().getString(FoodCategory.TAG_KEY);
         AsyncList asyncList = new AsyncList();
-        rvRecipes.setHasFixedSize(true);
         rvRecipes.setLayoutManager(new StaggeredGridLayoutManager(Measurements.numberOfGridLayoutColumns(this),LinearLayoutManager.VERTICAL));
         asyncList.execute(tag);
     }
