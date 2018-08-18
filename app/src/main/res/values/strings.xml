@@ -23,5 +23,6 @@
     <string name="title_activity_details">DetailsActivity</string>
     <string name="ingredients">المقادير :</string>
     <string name="steps">الخطوات :</string>
+    <string name="search">بحث ...</string>
 
 </resources>
