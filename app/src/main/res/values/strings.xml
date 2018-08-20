@@ -24,5 +24,6 @@
     <string name="ingredients">المقادير :</string>
     <string name="steps">الخطوات :</string>
     <string name="search">بحث ...</string>
+    <string name="favorite">Favorite</string>
 
 </resources>

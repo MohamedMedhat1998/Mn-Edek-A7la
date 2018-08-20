@@ -6,6 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
+import com.andalus.abomed7at55.mn_edek_a7la.Objects.FavoriteRecipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 
 import java.io.File;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-@Database(entities = {Recipe.class},version = 1 , exportSchema = false)
+@Database(entities = {Recipe.class, FavoriteRecipe.class},version = 1 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     public static final String DATABASE_NAME = "Food.db";
@@ -52,4 +53,6 @@ public abstract class AppDatabase extends RoomDatabase{
     }
 
     public abstract RecipeDao getRecipeDao();
+
+    public abstract FavoriteRecipeDao getFavoriteRecipeDao();
 }

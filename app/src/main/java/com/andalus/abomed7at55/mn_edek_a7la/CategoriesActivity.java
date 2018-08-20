@@ -28,6 +28,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.Adapters.RecipesAdapter;
 import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnCategoryClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
+import com.andalus.abomed7at55.mn_edek_a7la.Objects.FavoriteRecipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.Measurements;
@@ -94,8 +95,8 @@ public class CategoriesActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_favorite) {
+            startRecipesActivityWithTag(FavoriteRecipe.FAVORITE_RECIPE_TAG);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -134,9 +135,7 @@ public class CategoriesActivity extends AppCompatActivity
 
     @Override
     public void onCategoryClicked(String tag) {
-        Intent recipesActivityIntent = new Intent(CategoriesActivity.this,RecipesActivity.class);
-        recipesActivityIntent.putExtra(FoodCategory.TAG_KEY,tag);
-        startActivity(recipesActivityIntent);
+        startRecipesActivityWithTag(tag);
     }
 
     private void setUpDatabase(){
@@ -220,5 +219,11 @@ public class CategoriesActivity extends AppCompatActivity
             mAdapter = new RecipesAdapter(recipes, (OnRecipeClickListener) mContext);
             rvSearchResult.setAdapter(mAdapter);
         }
+    }
+
+    private void startRecipesActivityWithTag(String tag){
+        Intent recipesActivityIntent = new Intent(this,RecipesActivity.class);
+        recipesActivityIntent.putExtra(FoodCategory.TAG_KEY,tag);
+        startActivity(recipesActivityIntent);
     }
 }
