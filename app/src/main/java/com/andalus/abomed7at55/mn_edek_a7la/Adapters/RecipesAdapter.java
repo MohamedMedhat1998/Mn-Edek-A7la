@@ -55,6 +55,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
                 .load(mData.get(position).getPhotoLink())
                 .apply(new RequestOptions().placeholder(ImageUtils.getPlaceHolderId(mData.get(position).getCategory())))
                 .into(holder.ivRecipeItemMainImage);
+        new AsyncTaskIsFavorite(holder.ibFavoriteRecipeItem).execute(mData.get(position));
     }
 
     @Override
@@ -94,7 +95,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
 
         private ImageButton mImageButton;
 
-        public FavoriteRecipeAsyncTask(ImageButton imageButton){
+        FavoriteRecipeAsyncTask(ImageButton imageButton){
             mImageButton = imageButton;
         }
 
@@ -118,7 +119,32 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            //TODO change the icon of the ibFavorite
+            if(aBoolean){
+                mImageButton.setImageResource(android.R.drawable.star_big_on);
+            }else{
+                mImageButton.setImageResource(android.R.drawable.star_big_off);
+            }
+        }
+    }
+
+    class AsyncTaskIsFavorite extends AsyncTask<Recipe,Integer,Boolean>{
+
+        private ImageButton mImageButton;
+
+        AsyncTaskIsFavorite(ImageButton imageButton){
+            mImageButton = imageButton;
+        }
+
+        @Override
+        protected Boolean doInBackground(Recipe... recipes) {
+            boolean isFavoriteNow;
+            isFavoriteNow = AppDatabase.getInstance(mContext).getFavoriteRecipeDao().getFavoriteRecipeById(recipes[0].getId()) != null;
+            return isFavoriteNow;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
             if(aBoolean){
                 mImageButton.setImageResource(android.R.drawable.star_big_on);
             }else{
