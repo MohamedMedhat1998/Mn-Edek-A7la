@@ -52,6 +52,22 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_details" />
+    <include layout="@layout/content_details"/>
+
+    <FrameLayout
+        android:layout_gravity="bottom"
+        android:background="@color/White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_open_in_youtube"
+            android:theme="@style/YoutubeButtonStyle"
+            android:text="@string/watch_video"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

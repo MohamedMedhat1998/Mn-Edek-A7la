@@ -59,4 +59,9 @@
         <item name="android:layout_marginTop">8dp</item>
     </style>
 
+    <style name="YoutubeButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/Red_A700</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+
 </resources>
