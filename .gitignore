@@ -9,3 +9,5 @@
 /captures
 .externalNativeBuild
 /app/src/main/assets/Food.db
+/mn-edek-a7la-keystore.jks
+/app/google-services.json

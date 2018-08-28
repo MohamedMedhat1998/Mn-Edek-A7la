@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.CategoriesAdapter;
@@ -32,6 +34,8 @@ import com.andalus.abomed7at55.mn_edek_a7la.Objects.FavoriteRecipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.Measurements;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,14 +95,13 @@ public class CategoriesActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_favorite) {
             startRecipesActivityWithTag(FavoriteRecipe.FAVORITE_RECIPE_TAG);
-        } else if (id == R.id.nav_gallery) {
-
+        } else if (id == R.id.nav_recent) {
+            startActivity(new Intent(this,RecentActivity.class));
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -226,4 +229,5 @@ public class CategoriesActivity extends AppCompatActivity
         recipesActivityIntent.putExtra(FoodCategory.TAG_KEY,tag);
         startActivity(recipesActivityIntent);
     }
+
 }
