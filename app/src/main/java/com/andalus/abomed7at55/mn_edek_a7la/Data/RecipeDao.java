@@ -1,6 +1,8 @@
 package com.andalus.abomed7at55.mn_edek_a7la.Data;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
@@ -15,5 +17,11 @@ public interface RecipeDao {
 
     @Query("SELECT * FROM Recipe WHERE title Like :searchKeyword OR ingredients LIKE :searchKeyword OR steps LIKE :searchKeyword")
     List<Recipe> getRecipesBySearchKeyword(String searchKeyword);
+
+    @Query("SELECT * FROM Recipe WHERE id = :id")
+    Recipe getRecipeById(int id);
+
+    @Insert
+    void insertRecipe(Recipe recipe);
 
 }

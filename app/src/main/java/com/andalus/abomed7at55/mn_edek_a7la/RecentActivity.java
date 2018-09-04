@@ -1,6 +1,8 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.RecipesAdapter;
+import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Utils.JsonParser;
@@ -76,6 +79,8 @@ public class RecentActivity extends AppCompatActivity implements OnRecipeClickLi
         rvRecipesRecentActivity.setLayoutManager(new StaggeredGridLayoutManager(Measurements.numberOfGridLayoutColumns(this), LinearLayoutManager.VERTICAL));
         try {
             List<Recipe> data = JsonParser.parseRecipes(s);
+            Recipe[] recipes = data.toArray(new Recipe[data.size()]);
+            new CacheRecipes(this).execute(recipes);
             RecipesAdapter adapter = new RecipesAdapter(data,this);
             rvRecipesRecentActivity.setAdapter(adapter);
         } catch (JSONException e) {
@@ -95,5 +100,24 @@ public class RecentActivity extends AppCompatActivity implements OnRecipeClickLi
         detailsIntent.putExtra(Recipe.COLUMN_PHOTO_LINK,recipe.getPhotoLink());
         detailsIntent.putExtra(Recipe.COLUMN_VIDEO_LINK,recipe.getVideoLink());
         startActivity(detailsIntent);
+    }
+
+    private static class CacheRecipes extends AsyncTask<Recipe,Void,Void>{
+
+        private Context mContext;
+
+        CacheRecipes(Context context){
+            mContext = context;
+        }
+
+        @Override
+        protected Void doInBackground(Recipe... recipes) {
+            for (Recipe recipe : recipes) {
+                if(AppDatabase.getInstance(mContext).getRecipeDao().getRecipeById(recipe.getId()) == null){
+                    AppDatabase.getInstance(mContext).getRecipeDao().insertRecipe(recipe);
+                }
+            }
+            return null;
+        }
     }
 }
