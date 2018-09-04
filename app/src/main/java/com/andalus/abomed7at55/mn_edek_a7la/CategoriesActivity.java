@@ -2,8 +2,10 @@ package com.andalus.abomed7at55.mn_edek_a7la;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -142,6 +144,8 @@ public class CategoriesActivity extends AppCompatActivity
     }
 
     private void setUpDatabase(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        AppDatabase.setCurrentVersion(sharedPreferences.getInt(AppDatabase.VERSION_KEY,1));
         try {
             AppDatabase.copyDatabase(this);
         } catch (IOException e) {
@@ -163,11 +167,9 @@ public class CategoriesActivity extends AppCompatActivity
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.length() == 0){
-                    //search bar is empty TODO show categories rv
                     showView(rvCategories);
                     hideView(rvSearchResult);
                 }else{
-                    //search bar has some text TODO show search result rv. If there are no results, show "No Items" EditText
                     hideView(rvCategories);
                     showView(rvSearchResult);
                     AsyncList asyncList = new AsyncList();

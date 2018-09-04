@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
+import com.andalus.abomed7at55.mn_edek_a7la.Data.FavoriteDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FavoriteRecipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
@@ -30,9 +31,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     private List<Recipe> mData;
     private Context mContext;
     private OnRecipeClickListener mOnRecipeClickListener;
-
-    private static final int LOADER_ID = 10;
-    private static final String ADAPTER_POSITION = "adapter_position";
 
     public RecipesAdapter(List<Recipe> data, OnRecipeClickListener onRecipeClickListener){
         mData = data;
@@ -104,13 +102,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         protected Boolean doInBackground(Recipe... recipes) {
             Recipe recipe = recipes[0];
             FavoriteRecipe favoriteRecipe = new FavoriteRecipe(recipe.getId(),recipe.getTitle(),recipe.getIngredients(),recipe.getSteps(),recipe.getCategory(),recipe.getPhotoLink(),recipe.getVideoLink());
-            if(AppDatabase.getInstance(mContext).getFavoriteRecipeDao().getFavoriteRecipeById(recipes[0].getId()) == null){
-                //NOT FOUND IN THE DATABASE , TODO add to the database
-                AppDatabase.getInstance(mContext).getFavoriteRecipeDao().insertFavoriteRecipe(favoriteRecipe);
+            if(FavoriteDatabase.getInstance(mContext).getFavoriteRecipeDao().getFavoriteRecipeById(recipes[0].getId()) == null){
+                FavoriteDatabase.getInstance(mContext).getFavoriteRecipeDao().insertFavoriteRecipe(favoriteRecipe);
                 isFavoriteNow = true;
             }else{
-                //FOUND IN THE DATABASE , TODO remove from the database
-                AppDatabase.getInstance(mContext).getFavoriteRecipeDao().deleteFavoriteRecipe(favoriteRecipe);
+                FavoriteDatabase.getInstance(mContext).getFavoriteRecipeDao().deleteFavoriteRecipe(favoriteRecipe);
                 isFavoriteNow = false;
             }
             return isFavoriteNow;
@@ -138,7 +134,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         @Override
         protected Boolean doInBackground(Recipe... recipes) {
             boolean isFavoriteNow;
-            isFavoriteNow = AppDatabase.getInstance(mContext).getFavoriteRecipeDao().getFavoriteRecipeById(recipes[0].getId()) != null;
+            isFavoriteNow = FavoriteDatabase.getInstance(mContext).getFavoriteRecipeDao().getFavoriteRecipeById(recipes[0].getId()) != null;
             return isFavoriteNow;
         }
 

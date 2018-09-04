@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.andalus.abomed7at55.mn_edek_a7la.Adapters.RecipesAdapter;
 import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
+import com.andalus.abomed7at55.mn_edek_a7la.Data.FavoriteDatabase;
 import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FavoriteRecipe;
 import com.andalus.abomed7at55.mn_edek_a7la.Objects.FoodCategory;
@@ -73,7 +74,7 @@ public class RecipesActivity extends AppCompatActivity implements OnRecipeClickL
         protected List<Recipe> doInBackground(String... strings) {
             //TODO add a switch on the TAG
             if(strings[0].equals(FavoriteRecipe.FAVORITE_RECIPE_TAG)){
-                return (List<Recipe>)(List<?>) AppDatabase.getInstance(getBaseContext()).getFavoriteRecipeDao().getAll();
+                return (List<Recipe>)(List<?>) FavoriteDatabase.getInstance(getBaseContext()).getFavoriteRecipeDao().getAll();
             }else {
                 return AppDatabase.getInstance(getBaseContext()).getRecipeDao().getRecipesByCategory("%"+strings[0]+"%");
             }
