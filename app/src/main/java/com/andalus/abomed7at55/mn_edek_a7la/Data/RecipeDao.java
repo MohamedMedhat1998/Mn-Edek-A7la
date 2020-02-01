@@ -1,11 +1,10 @@
 package com.andalus.abomed7at55.mn_edek_a7la.Data;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
 
-import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
+import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe;
 
 import java.util.List;
 

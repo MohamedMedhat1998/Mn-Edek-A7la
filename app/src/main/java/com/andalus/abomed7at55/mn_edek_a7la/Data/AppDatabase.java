@@ -1,16 +1,15 @@
 package com.andalus.abomed7at55.mn_edek_a7la.Data;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.andalus.abomed7at55.mn_edek_a7la.Objects.Recipe;
+import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe;
 
 import java.io.File;
 import java.io.FileOutputStream;

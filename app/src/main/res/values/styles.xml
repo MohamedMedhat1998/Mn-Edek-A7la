@@ -22,7 +22,7 @@
     </style>
 
     <style name="SplashScreenTextStyle">
-        <item name="android:textColor">@color/White</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:textSize">@dimen/splash_screen_text_size</item>
     </style>
 

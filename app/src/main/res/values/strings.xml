@@ -27,5 +27,6 @@
     <string name="favorite">المفضلة</string>
     <string name="watch_video">مشاهدة الفيديو</string>
     <string name="recent">آخر الوصفات</string>
+    <string name="view_all">عرض الكل</string>
 
 </resources>

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.splash.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,10 @@
         </activity>
 
         <activity
-            android:name=".CategoriesActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_categories"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RecipesActivity" />
+        <activity android:name=".RecipesActivity" android:theme="@style/SplashScreenTheme" />
 
         <activity
             android:name=".DetailsActivity"
