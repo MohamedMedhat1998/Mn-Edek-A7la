@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import kotlinx.android.synthetic.main.item_category.view.*
-import kotlinx.android.synthetic.main.item_recipe.view.*
 
 class CategoriesAdapter(private val data: MutableList<Category>) : RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>() {
 
@@ -27,6 +26,7 @@ class CategoriesAdapter(private val data: MutableList<Category>) : RecyclerView.
         holder.tvCategoryName.text = data[position].title
         holder.rvRecipes.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, true)
         holder.rvRecipes.adapter = RecipesAdapter(data[position].data)
+        holder.rvRecipes.onFlingListener = null
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(holder.rvRecipes)
     }

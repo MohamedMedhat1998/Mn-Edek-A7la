@@ -1,26 +1,15 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Window;
 
-import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
-import com.andalus.abomed7at55.mn_edek_a7la.Data.FavoriteDatabase;
-import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
-import com.andalus.abomed7at55.mn_edek_a7la.model.Category;
-import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe;
-
-import java.util.List;
-
-
-public class RecipesActivity extends AppCompatActivity implements OnRecipeClickListener{
+public class RecipesActivity extends AppCompatActivity {
 
     RecyclerView rvRecipes;
     private Context mContext;
@@ -38,14 +27,8 @@ public class RecipesActivity extends AppCompatActivity implements OnRecipeClickL
 
     }
 
-    private void setUpRecyclerView(){
+    private void setUpRecyclerView() {
         rvRecipes.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-    }
-
-    @Override
-    public void onRecipeClicked(Recipe recipe) {
-        Intent detailsIntent = new Intent(this,DetailsActivity.class);
-        startActivity(detailsIntent);
     }
 
 }

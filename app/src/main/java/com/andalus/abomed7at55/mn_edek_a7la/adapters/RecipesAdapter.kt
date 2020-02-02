@@ -13,7 +13,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
-class RecipesAdapter(private val data: MutableList<Recipe>) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
+class RecipesAdapter(private val data: List<Recipe>) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context
 
@@ -30,6 +30,7 @@ class RecipesAdapter(private val data: MutableList<Recipe>) : RecyclerView.Adapt
         val stringBuilder = StringBuilder()
         categories.forEach {
             stringBuilder.append(context.getString(context.resources.getIdentifier(it, "string", context.packageName)))
+            stringBuilder.append(',')
         }
         holder.tvRecipeCategories.text = stringBuilder.toString()
     }

@@ -1,32 +1,23 @@
 package com.andalus.abomed7at55.mn_edek_a7la;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.andalus.abomed7at55.mn_edek_a7la.Data.AppDatabase;
-import com.andalus.abomed7at55.mn_edek_a7la.Interfaces.OnRecipeClickListener;
-import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe;
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Measurements;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
-import org.json.JSONException;
 
-import java.util.List;
-
-
-public class RecentActivity extends AppCompatActivity implements OnRecipeClickListener {
+public class RecentActivity extends AppCompatActivity {
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
@@ -66,36 +57,11 @@ public class RecentActivity extends AppCompatActivity implements OnRecipeClickLi
                 });
     }
 
-    private void doWhenReceived(){
+    private void doWhenReceived() {
         String s = mFirebaseRemoteConfig.getString("test_key");
-        Log.d("REMOTE CONFIG VALUE",s);
+        Log.d("REMOTE CONFIG VALUE", s);
 
         rvRecipesRecentActivity.setLayoutManager(new StaggeredGridLayoutManager(Measurements.numberOfGridLayoutColumns(this), LinearLayoutManager.VERTICAL));
     }
 
-
-    @Override
-    public void onRecipeClicked(Recipe recipe) {
-        Intent detailsIntent = new Intent(this,DetailsActivity.class);
-        startActivity(detailsIntent);
-    }
-
-    private static class CacheRecipes extends AsyncTask<Recipe,Void,Void>{
-
-        private Context mContext;
-
-        CacheRecipes(Context context){
-            mContext = context;
-        }
-
-        @Override
-        protected Void doInBackground(Recipe... recipes) {
-            for (Recipe recipe : recipes) {
-                if(AppDatabase.getInstance(mContext).getRecipeDao().getRecipeById(recipe.getId()) == null){
-                    AppDatabase.getInstance(mContext).getRecipeDao().insertRecipe(recipe);
-                }
-            }
-            return null;
-        }
-    }
 }

@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.andalus.abomed7at55.mn_edek_a7la.R
+import com.andalus.abomed7at55.mn_edek_a7la.services.FileManagerService
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -19,6 +20,9 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_splash_screen)
+
+        val fileServiceIntent = Intent(this, FileManagerService::class.java)
+        startService(fileServiceIntent)
 
         Glide.with(this).load(R.drawable.logo).apply(RequestOptions.circleCropTransform()).into(ivLogo)
         val runnable = Runnable {

@@ -1,4 +1,4 @@
-package com.andalus.abomed7at55.mn_edek_a7la.Data;
+package com.andalus.abomed7at55.mn_edek_a7la.data;
 
 import android.content.Context;
 

@@ -1,8 +1,7 @@
-package com.andalus.abomed7at55.mn_edek_a7la.Services;
+package com.andalus.abomed7at55.mn_edek_a7la.services;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.util.Log;
 
 import com.andalus.abomed7at55.mn_edek_a7la.RecentActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
