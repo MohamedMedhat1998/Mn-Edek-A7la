@@ -6,6 +6,7 @@
 
     <application
         android:allowBackup="true"
+        android:largeHeap="true"
         android:name=".koin.KoinApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

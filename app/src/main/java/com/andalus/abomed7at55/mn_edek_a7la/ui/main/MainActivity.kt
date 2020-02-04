@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         setupCategories()
     }
 
-    //TODO fix performance issue
     private fun setupCategories() {
 
         val categories = mutableListOf<Category>()
@@ -59,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         val categoriesAdapter = CategoriesAdapter(categories)
         rvCategories.layoutManager = LinearLayoutManager(this)
+        rvCategories.setItemViewCacheSize(11)
         rvCategories.adapter = categoriesAdapter
 
         mainViewModel.meatData.observe(this, Observer {
