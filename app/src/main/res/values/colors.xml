@@ -6,10 +6,13 @@
 
     <color name="Transparent">#00ffffff</color>
     <color name="White">#ffffff</color>
+
+    <color name="TagBackground">#F0F0F0</color>
+    <color name="Separator">#70F50057</color>
+
     <color name="Black_Transparent">#61000000</color>
     <color name="Black">#000000</color>
 
-    <color name="Brown_900">#3E2723</color>
 
     <color name="Deep_Purple_50">#EDE7F6</color>
     <color name="Deep_Purple_100">#D1C4E9</color>
@@ -20,5 +23,8 @@
     <color name="Deep_Purple_900">#311B92</color>
 
     <color name="Red_A700">#D50000</color>
+
+    <color name="PinkA400">#F50057</color>
+    <color name="PinkA700">#C51162</color>
 
 </resources>

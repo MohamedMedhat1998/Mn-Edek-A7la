@@ -13,4 +13,7 @@
         <item name="android:elevation">@dimen/splash_screen_items_elevation</item>
     </style>
 
+    <dimen name="app_bar_height">204dp</dimen>
+
+
 </resources>

@@ -1,52 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--TODO fix api levels below 21-->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="44dp"
-    android:background="@color/White"
     android:layout_height="match_parent"
+    android:layout_marginTop="-24dp"
+    android:elevation="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".DetailsActivity"
+    tools:context=".ui.details.DetailsActivity"
     tools:showIn="@layout/activity_details">
-    <LinearLayout
-        android:orientation="vertical"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:paddingBottom="16dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-24dp"
+        app:cardCornerRadius="24dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:text="@string/ingredients"
-            style="@style/DetailsActivityTextStyle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <View
-            android:layout_width="match_parent"
-            style="@style/DetailsActivitySeparatorStyle" />
+            <TextView
+                android:id="@+id/tvRecipeTitle"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="فطير الأفران"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_ingredients_details"
-            style="@style/DetailsActivityTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/tagsHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
+                tools:ignore="RtlHardcoded" />
 
-        <TextView
-            android:text="@string/steps"
-            style="@style/DetailsActivityTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/Separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tagsHolder" />
 
-        <View
-            android:layout_width="match_parent"
-            style="@style/DetailsActivitySeparatorStyle" />
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/ingredients"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <TextView
-            android:id="@+id/tv_steps_details"
-            style="@style/DetailsActivityTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/FakeIngredients"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    </LinearLayout>
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/Separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvIngredients" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/steps"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/tvSteps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="64dp"
+                android:text="@string/FakeSteps"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.core.widget.NestedScrollView>

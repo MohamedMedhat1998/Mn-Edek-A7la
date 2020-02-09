@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/Deep_Purple_700</item>
-        <item name="colorPrimaryDark">@color/Deep_Purple_900</item>
+        <item name="colorPrimary">@color/PinkA400</item>
+        <item name="colorPrimaryDark">@color/PinkA700</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimaryDark">@color/Brown_900</item>
+        <item name="colorPrimaryDark">@color/PinkA700</item>
     </style>
 
     <style name="DetailsActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">

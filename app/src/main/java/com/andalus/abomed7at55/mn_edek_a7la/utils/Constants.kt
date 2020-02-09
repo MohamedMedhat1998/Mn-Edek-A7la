@@ -30,4 +30,7 @@ object Constants {
 
     //services
     const val FILE_SERVICE = "file-service"
+
+    //keys
+    const val RECIPE_ID_KEY = "recipe-id"
 }

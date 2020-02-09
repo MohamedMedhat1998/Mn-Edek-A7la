@@ -1,5 +1,6 @@
 package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,11 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.CategoriesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
+import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
-
+//TODO fix api levels below 21
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -56,7 +59,9 @@ class MainActivity : AppCompatActivity() {
         categories.add(bakery)
         categories.add(milk)
 
-        val categoriesAdapter = CategoriesAdapter(categories)
+        val categoriesAdapter = CategoriesAdapter(categories) {
+            startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
+        }
         rvCategories.layoutManager = LinearLayoutManager(this)
         rvCategories.setItemViewCacheSize(11)
         rvCategories.adapter = categoriesAdapter

@@ -1,4 +1,4 @@
-package com.andalus.abomed7at55.mn_edek_a7la.custom_views
+package com.andalus.abomed7at55.mn_edek_a7la.custom
 
 import android.content.Context
 import android.graphics.Typeface
@@ -22,7 +22,7 @@ class FontAwesomeTextView : TextView {
 
     private fun init() {
         val tf = Typeface.createFromAsset(context.assets,
-                "fontawesome.ttf")
+                "fonts/fontawesome.ttf")
         typeface = tf
     }
 

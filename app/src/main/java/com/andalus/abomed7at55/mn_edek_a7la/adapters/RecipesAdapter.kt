@@ -8,13 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andalus.abomed7at55.mn_edek_a7la.R
-import com.andalus.abomed7at55.mn_edek_a7la.custom_views.FontAwesomeTextView
+import com.andalus.abomed7at55.mn_edek_a7la.custom.FontAwesomeTextView
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
-import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
-class RecipesAdapter(private val data: List<PreviewRecipe>) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
+class RecipesAdapter(private val data: List<PreviewRecipe>, private val onClick: (id: Int) -> Unit = {}) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context
 
@@ -33,6 +32,7 @@ class RecipesAdapter(private val data: List<PreviewRecipe>) : RecyclerView.Adapt
             stringBuilder.append(context.getString(context.resources.getIdentifier(it, "string", context.packageName)))
             stringBuilder.append(',')
         }
+        stringBuilder.deleteCharAt(stringBuilder.length - 1)
         holder.tvRecipeCategories.text = stringBuilder.toString()
     }
 
@@ -43,6 +43,13 @@ class RecipesAdapter(private val data: List<PreviewRecipe>) : RecyclerView.Adapt
     inner class RecipeHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivRecipeImage: ImageView = itemView.ivRecipeImage
         val tvRecipeTitle: TextView = itemView.tvRecipeTitle
-        val tvRecipeCategories: FontAwesomeTextView = itemView.tvRecipeCategories
+        val tvRecipeCategories: TextView = itemView.tvRecipeCategories
+
+        init {
+            itemView.setOnClickListener {
+                onClick.invoke(data[adapterPosition].id)
+            }
+        }
+
     }
 }

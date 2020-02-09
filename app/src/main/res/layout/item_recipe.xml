@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="200dp"
+    android:layout_height="220dp"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    app:cardCornerRadius="32dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,25 +44,38 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:textColor="@color/Black"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             tools:text="البطاطس بالجبن الرومي" />
 
-        <com.andalus.abomed7at55.mn_edek_a7la.custom_views.FontAwesomeTextView
+        <com.andalus.abomed7at55.mn_edek_a7la.custom.FontAwesomeTextView
+            android:id="@+id/tvTagsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
+            android:text="@string/tags_icon" />
+
+        <TextView
             android:id="@+id/tvRecipeCategories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:gravity="end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:textSize="12sp"
-            android:text=" نشويات،حلويات،معجنات&#xf02c;"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toStartOf="@+id/tvTagsIcon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
+            tools:text="حلويات" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
