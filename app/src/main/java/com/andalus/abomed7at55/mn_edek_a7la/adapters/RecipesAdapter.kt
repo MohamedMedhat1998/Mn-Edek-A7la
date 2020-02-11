@@ -8,12 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andalus.abomed7at55.mn_edek_a7la.R
-import com.andalus.abomed7at55.mn_edek_a7la.custom.FontAwesomeTextView
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
-class RecipesAdapter(private val data: List<PreviewRecipe>, private val onClick: (id: Int) -> Unit = {}) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
+class RecipesAdapter(private val data: List<PreviewRecipe>, var onClick: (id: Int) -> Unit = {}) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context
 

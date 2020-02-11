@@ -33,4 +33,8 @@ object Constants {
 
     //keys
     const val RECIPE_ID_KEY = "recipe-id"
+    const val CATEGORIES_ADAPTER_KEY = "categories-adapter"
+
+    //Preview
+    const val PREVIEW_LIMIT = 8
 }

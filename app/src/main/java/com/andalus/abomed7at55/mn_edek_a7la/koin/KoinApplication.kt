@@ -6,6 +6,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.data.AppDatabase
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.LocalRecipesRepository
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
+import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import org.koin.android.ext.koin.androidApplication
@@ -27,7 +28,8 @@ val koinModule = module {
     single { provideDatabase(androidApplication()) }
     single { provideRecipeDao(get()) }
     single { LocalRecipesRepository(get()) as RepositoryDao }
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(),androidApplication()) }
+    viewModel { DetailsViewModel(get()) }
 
 }
 

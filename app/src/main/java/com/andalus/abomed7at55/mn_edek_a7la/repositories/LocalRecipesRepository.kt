@@ -8,7 +8,11 @@ import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 class LocalRecipesRepository(private val dao: RecipeDao) : RepositoryDao {
 
     override fun getPreviewRecipes(): LiveData<List<PreviewRecipe>> {
-        return dao.previewRecipes
+        return dao.previewRecipes()
+    }
+
+    override fun getRecipeById(id: Int): LiveData<Recipe> {
+        return dao.getRecipeById(id)
     }
 
 }
