@@ -37,16 +37,18 @@
             android:id="@+id/tvRecipeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:textColor="@color/Black"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvRecipeCategories"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ibLove"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="البطاطس بالجبن الرومي" />
 
         <com.andalus.abomed7at55.mn_edek_a7la.custom.FontAwesomeTextView
@@ -55,26 +57,45 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:text="@string/tags_icon"
             android:textSize="12sp"
             android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRecipeCategories"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
-            android:text="@string/tags_icon" />
+            app:layout_constraintTop_toTopOf="@+id/tvRecipeCategories" />
 
         <TextView
             android:id="@+id/tvRecipeCategories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
+            android:layout_marginBottom="8dp"
             android:gravity="start"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvTagsIcon"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ibLove"
             app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
             tools:text="حلويات" />
+
+        <ImageButton
+            android:id="@+id/ibLove"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
