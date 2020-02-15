@@ -9,4 +9,7 @@ interface RepositoryDao {
     fun getPreviewRecipes(): LiveData<List<PreviewRecipe>>
 
     fun getRecipeById(id: Int): LiveData<Recipe>
+
+    suspend fun setFavoriteForRecipe(id: Int, currentState: Boolean)
+
 }

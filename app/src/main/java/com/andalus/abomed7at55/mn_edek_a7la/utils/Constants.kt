@@ -5,6 +5,8 @@ object Constants {
     //DB
     const val DATABASE_NAME = "Food.db"
     const val VERSION_KEY = "version_key"
+
+    //RecipeTable
     const val COLUMN_ID = "id"
     const val COLUMN_TITLE = "title"
     const val COLUMN_INGREDIENTS = "ingredients"
@@ -12,6 +14,7 @@ object Constants {
     const val COLUMN_CATEGORY = "category"
     const val COLUMN_PHOTO_LINK = "photo_link"
     const val COLUMN_VIDEO_LINK = "video_link"
+    const val COLUMN_IS_FAVORITE = "is_favorite"
 
     //Categories
     const val MEAT = "meat"
@@ -33,8 +36,10 @@ object Constants {
 
     //keys
     const val RECIPE_ID_KEY = "recipe-id"
-    const val CATEGORIES_ADAPTER_KEY = "categories-adapter"
 
     //Preview
     const val PREVIEW_LIMIT = 8
+
+    //others
+    const val STRING_RESOURCE = "string"
 }

@@ -4,15 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.STRING_RESOURCE
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
-class RecipesAdapter(private val data: List<PreviewRecipe>, var onClick: (id: Int) -> Unit = {}) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
+class RecipesAdapter(
+        private val data: List<PreviewRecipe>,
+        private val onClick: (id: Int) -> Unit = {},
+        private val onLoveClicked: (id: Int, currentState: Boolean) -> Unit
+) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context
 
@@ -28,11 +34,16 @@ class RecipesAdapter(private val data: List<PreviewRecipe>, var onClick: (id: In
         val categories = data[position].category.split(',')
         val stringBuilder = StringBuilder()
         categories.forEach {
-            stringBuilder.append(context.getString(context.resources.getIdentifier(it, "string", context.packageName)))
+            stringBuilder.append(context.getString(context.resources.getIdentifier(it, STRING_RESOURCE, context.packageName)))
             stringBuilder.append(',')
         }
         stringBuilder.deleteCharAt(stringBuilder.length - 1)
         holder.tvRecipeCategories.text = stringBuilder.toString()
+
+        if (data[position].isFavorite)
+            holder.ibLove.setImageResource(R.drawable.ic_heart_solid)
+        else
+            holder.ibLove.setImageResource(R.drawable.ic_heart)
     }
 
     override fun getItemCount(): Int {
@@ -43,10 +54,14 @@ class RecipesAdapter(private val data: List<PreviewRecipe>, var onClick: (id: In
         val ivRecipeImage: ImageView = itemView.ivRecipeImage
         val tvRecipeTitle: TextView = itemView.tvRecipeTitle
         val tvRecipeCategories: TextView = itemView.tvRecipeCategories
+        val ibLove: ImageButton = itemView.ibLove
 
         init {
             itemView.setOnClickListener {
                 onClick.invoke(data[adapterPosition].id)
+            }
+            ibLove.setOnClickListener {
+                onLoveClicked.invoke(data[adapterPosition].id, data[adapterPosition].isFavorite)
             }
         }
 

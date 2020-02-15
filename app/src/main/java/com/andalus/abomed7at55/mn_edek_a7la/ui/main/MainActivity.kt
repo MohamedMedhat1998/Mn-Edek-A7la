@@ -2,6 +2,7 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -32,9 +33,11 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        categoriesAdapter = CategoriesAdapter {
+        categoriesAdapter = CategoriesAdapter(onRecipeClicked = {
             startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
-        }
+        }, onLoveClicked = { id, currentState ->
+            mainViewModel.setFavoriteRecipe(id, currentState)
+        })
 
         rvCategories.layoutManager = LinearLayoutManager(this)
         rvCategories.setItemViewCacheSize(11)

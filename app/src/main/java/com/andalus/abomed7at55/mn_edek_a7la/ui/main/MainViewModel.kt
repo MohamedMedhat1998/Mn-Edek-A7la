@@ -5,14 +5,16 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import kotlinx.coroutines.launch
 
 
-class MainViewModel(repository: RepositoryDao, context: Context) : ViewModel() {
+class MainViewModel(val repository: RepositoryDao, context: Context) : ViewModel() {
 
     private val dumb = MutableLiveData<Int>()
     private val recipes = switchMap(dumb) {
@@ -68,6 +70,12 @@ class MainViewModel(repository: RepositoryDao, context: Context) : ViewModel() {
 
     private fun List<PreviewRecipe>.filterData(category: String): List<PreviewRecipe> {
         return this.filter { previewRecipe -> previewRecipe.category.contains(category) }.takeLast(Constants.PREVIEW_LIMIT)
+    }
+
+    fun setFavoriteRecipe(id: Int, currentState: Boolean) {
+        viewModelScope.launch {
+            repository.setFavoriteForRecipe(id, currentState)
+        }
     }
 
 }

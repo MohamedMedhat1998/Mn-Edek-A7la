@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.andalus.abomed7at55.mn_edek_a7la.R
+import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import com.bumptech.glide.Glide
@@ -20,6 +20,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class DetailsActivity : AppCompatActivity() {
 
     private val detailsViewModel: DetailsViewModel by viewModel()
+    private lateinit var recipe: Recipe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         detailsViewModel.recipe.observe(this, Observer { recipe ->
+            this.recipe = recipe
             val tags = recipe.category.split(',')
             loadTags(tags)
             tvRecipeTitle.text = recipe.title
@@ -43,11 +45,21 @@ class DetailsActivity : AppCompatActivity() {
                 })
             }
             Glide.with(this).load(recipe.photoLink).placeholder(R.drawable.placeholder).into(ivRecipeImage)
+            if (recipe.isFavorite)
+                ibLove.setImageResource(R.drawable.ic_heart_solid)
+            else
+                ibLove.setImageResource(R.drawable.ic_heart)
         })
+
+        ibLove.setOnClickListener {
+            if (::recipe.isInitialized)
+                detailsViewModel.setFavoriteRecipes(recipe.id, recipe.isFavorite)
+        }
 
     }
 
     private fun loadTags(tags: List<String>) {
+        tagsHolder.removeAllViews()
         tags.reversed().forEach { title ->
             val inflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val tag = inflater.inflate(R.layout.item_tag, null)

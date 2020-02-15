@@ -13,7 +13,11 @@ import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import kotlinx.android.synthetic.main.item_category.view.*
 import java.io.Serializable
 
-class CategoriesAdapter(var data: List<Category> = listOf(), private val onRecipeClicked: (id: Int) -> Unit = {}) : RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>(), Serializable {
+class CategoriesAdapter(
+        var data: List<Category> = listOf(),
+        private val onRecipeClicked: (id: Int) -> Unit = {},
+        private val onLoveClicked: (id: Int, currentState: Boolean) -> Unit
+) : RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>(), Serializable {
 
     private lateinit var context: Context
 
@@ -25,9 +29,12 @@ class CategoriesAdapter(var data: List<Category> = listOf(), private val onRecip
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
         holder.tvCategoryName.text = data[position].title
-        holder.rvRecipes.adapter = RecipesAdapter(data[position].data){
+        holder.rvRecipes.adapter = RecipesAdapter(data[position].data, {
             onRecipeClicked.invoke(it)
+        }) { id, currentState ->
+            onLoveClicked.invoke(id, currentState)
         }
+
     }
 
     override fun getItemCount(): Int {

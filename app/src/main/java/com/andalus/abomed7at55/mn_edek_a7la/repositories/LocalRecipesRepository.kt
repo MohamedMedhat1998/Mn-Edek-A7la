@@ -15,4 +15,8 @@ class LocalRecipesRepository(private val dao: RecipeDao) : RepositoryDao {
         return dao.getRecipeById(id)
     }
 
+    override suspend fun setFavoriteForRecipe(id: Int, currentState: Boolean) {
+        dao.setFavoriteForRecipe(id, !currentState)
+    }
+
 }
