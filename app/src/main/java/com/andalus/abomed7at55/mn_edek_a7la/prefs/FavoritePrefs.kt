@@ -8,7 +8,7 @@ class FavoritePrefs(context: Context) : PrefsManager<Int, Boolean> {
     private val prefs = context.getSharedPreferences(FAVORITE_PREFS_FILE_NAME, Context.MODE_PRIVATE)
 
     override fun save(key: Int, value: Boolean): Boolean {
-        if (prefs.getBoolean("$key", false) != value){
+        if (prefs.getBoolean("$key", false) != value) {
             prefs.edit().putBoolean("$key", value).apply()
             return true
         }
@@ -22,6 +22,15 @@ class FavoritePrefs(context: Context) : PrefsManager<Int, Boolean> {
                 favoriteIds.add(it.key.toInt())
         }
         return favoriteIds
+    }
+
+    override fun invert(key: Int): Boolean {
+        prefs.edit().putBoolean("$key", !prefs.getBoolean("$key", false)).apply()
+        return prefs.getBoolean("$key", false)
+    }
+
+    override fun get(key: Int): Boolean {
+        return prefs.getBoolean("$key", false)
     }
 
 }

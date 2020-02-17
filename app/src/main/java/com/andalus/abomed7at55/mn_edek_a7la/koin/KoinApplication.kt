@@ -42,7 +42,7 @@ val koinModule = module {
     single { LocalRecipesRepository(get(), get()) as RepositoryDao }
     single { FavoriteRepositoryImpl(get(), get(), get()) as FavoriteRepository }
     viewModel { MainViewModel(get(), androidApplication()) }
-    viewModel { DetailsViewModel(get()) }
+    viewModel { DetailsViewModel(get(), get()) }
     viewModel { FavoriteViewModel(get(), get()) }
 
 }

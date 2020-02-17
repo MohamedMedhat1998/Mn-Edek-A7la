@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.andalus.abomed7at55.mn_edek_a7la.R
@@ -45,17 +46,22 @@ class DetailsActivity : AppCompatActivity() {
                 })
             }
             Glide.with(this).load(recipe.photoLink).placeholder(R.drawable.placeholder).into(ivRecipeImage)
-            //TODO fix favorite button
-            /*if (recipe.isFavorite)
+        })
+
+        detailsViewModel.isFavorite.observe(this, Observer {
+            Toast.makeText(this, "observed, $it", Toast.LENGTH_SHORT).show()
+            if (it)
                 ibLove.setImageResource(R.drawable.ic_heart_solid)
             else
-                ibLove.setImageResource(R.drawable.ic_heart)*/
+                ibLove.setImageResource(R.drawable.ic_heart)
         })
 
         //TODO fix favorite button
         ibLove.setOnClickListener {
-            /*if (::recipe.isInitialized)
-                detailsViewModel.setFavoriteRecipes(recipe.id, recipe.isFavorite)*/
+            if (::recipe.isInitialized) {
+                detailsViewModel.switchFavoriteRecipes(recipe.id)
+                Toast.makeText(this, "ib clicked", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
