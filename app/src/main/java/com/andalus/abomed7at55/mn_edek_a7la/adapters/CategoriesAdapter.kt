@@ -16,7 +16,7 @@ import java.io.Serializable
 class CategoriesAdapter(
         var data: List<Category> = listOf(),
         private val onRecipeClicked: (id: Int) -> Unit = {},
-        private val onLoveClicked: (id: Int, currentState: Boolean) -> Unit
+        private val onOptionsClicked: (id: Int, optionsButton: View) -> Unit
 ) : RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>(), Serializable {
 
     private lateinit var context: Context
@@ -29,11 +29,16 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
         holder.tvCategoryName.text = data[position].title
-        holder.rvRecipes.adapter = RecipesAdapter(data[position].data, {
+
+        data[position].recipesAdapter.onClick = {
             onRecipeClicked.invoke(it)
-        }) { id, currentState ->
-            onLoveClicked.invoke(id, currentState)
         }
+
+        data[position].recipesAdapter.onOptionsClicked = { id, optionsButton ->
+            onOptionsClicked.invoke(id, optionsButton)
+        }
+
+        holder.rvRecipes.adapter = data[position].recipesAdapter
 
     }
 

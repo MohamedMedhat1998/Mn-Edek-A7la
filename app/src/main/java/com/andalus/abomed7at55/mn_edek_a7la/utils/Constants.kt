@@ -30,6 +30,7 @@ object Constants {
 
     //prefs
     const val METADATA_FILE_NAME = "meta-data"
+    const val FAVORITE_PREFS_FILE_NAME = "favorite-recipes"
 
     //services
     const val FILE_SERVICE = "file-service"

@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
 class RecipesAdapter(
-        private val data: List<PreviewRecipe>,
-        private val onClick: (id: Int) -> Unit = {},
-        private val onLoveClicked: (id: Int, currentState: Boolean) -> Unit
+        var data: List<PreviewRecipe> = listOf(),
+        var onClick: (id: Int) -> Unit = {},
+        var onOptionsClicked: (id: Int, optionsButton: View) -> Unit
 ) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context
@@ -40,10 +40,6 @@ class RecipesAdapter(
         stringBuilder.deleteCharAt(stringBuilder.length - 1)
         holder.tvRecipeCategories.text = stringBuilder.toString()
 
-        if (data[position].isFavorite)
-            holder.ibLove.setImageResource(R.drawable.ic_heart_solid)
-        else
-            holder.ibLove.setImageResource(R.drawable.ic_heart)
     }
 
     override fun getItemCount(): Int {
@@ -54,14 +50,14 @@ class RecipesAdapter(
         val ivRecipeImage: ImageView = itemView.ivRecipeImage
         val tvRecipeTitle: TextView = itemView.tvRecipeTitle
         val tvRecipeCategories: TextView = itemView.tvRecipeCategories
-        val ibLove: ImageButton = itemView.ibLove
+        private val ibOptions: ImageButton = itemView.ibOptions
 
         init {
             itemView.setOnClickListener {
                 onClick.invoke(data[adapterPosition].id)
             }
-            ibLove.setOnClickListener {
-                onLoveClicked.invoke(data[adapterPosition].id, data[adapterPosition].isFavorite)
+            ibOptions.setOnClickListener {
+                onOptionsClicked.invoke(data[adapterPosition].id,it)
             }
         }
 

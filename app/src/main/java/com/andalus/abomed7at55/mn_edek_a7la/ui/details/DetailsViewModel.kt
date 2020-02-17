@@ -22,8 +22,6 @@ class DetailsViewModel(private val repository: RepositoryDao) : ViewModel() {
     }
 
     fun setFavoriteRecipes(id: Int, isFavorite: Boolean) {
-        viewModelScope.launch {
-            repository.setFavoriteForRecipe(id, isFavorite)
-        }
+        repository.setFavoriteRecipe(id, isFavorite)
     }
 }

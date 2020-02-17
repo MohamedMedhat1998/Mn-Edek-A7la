@@ -10,6 +10,6 @@ interface RepositoryDao {
 
     fun getRecipeById(id: Int): LiveData<Recipe>
 
-    suspend fun setFavoriteForRecipe(id: Int, currentState: Boolean)
+    fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean
 
 }

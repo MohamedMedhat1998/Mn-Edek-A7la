@@ -45,15 +45,17 @@ class DetailsActivity : AppCompatActivity() {
                 })
             }
             Glide.with(this).load(recipe.photoLink).placeholder(R.drawable.placeholder).into(ivRecipeImage)
-            if (recipe.isFavorite)
+            //TODO fix favorite button
+            /*if (recipe.isFavorite)
                 ibLove.setImageResource(R.drawable.ic_heart_solid)
             else
-                ibLove.setImageResource(R.drawable.ic_heart)
+                ibLove.setImageResource(R.drawable.ic_heart)*/
         })
 
+        //TODO fix favorite button
         ibLove.setOnClickListener {
-            if (::recipe.isInitialized)
-                detailsViewModel.setFavoriteRecipes(recipe.id, recipe.isFavorite)
+            /*if (::recipe.isInitialized)
+                detailsViewModel.setFavoriteRecipes(recipe.id, recipe.isFavorite)*/
         }
 
     }

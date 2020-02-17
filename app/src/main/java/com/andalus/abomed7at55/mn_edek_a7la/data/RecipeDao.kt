@@ -8,12 +8,16 @@ import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 
 @Dao
 interface RecipeDao {
-    @Query("SELECT id,title,category,photo_link,is_favorite FROM Recipe")
+    @Query("SELECT id,title,category,photo_link FROM Recipe")
     fun previewRecipes(): LiveData<List<PreviewRecipe>>
 
     @Query("SELECT * FROM Recipe WHERE id = :id ")
     fun getRecipeById(id: Int): LiveData<Recipe>
 
-    @Query("UPDATE Recipe SET is_favorite = :isFavorite WHERE id = :id")
-    suspend fun setFavoriteForRecipe(id: Int, isFavorite: Boolean)
+    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE id in (:ids)")
+    fun getPreviewRecipesByIds(ids: List<Int>): LiveData<List<PreviewRecipe>>
+
+    @Query("SELECT * FROM Recipe WHERE id in (:ids)")
+    fun getRecipesById(ids: List<Int>): LiveData<List<Recipe>>
+
 }

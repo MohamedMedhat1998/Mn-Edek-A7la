@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
+import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
 
-class LocalRecipesRepository(private val dao: RecipeDao) : RepositoryDao {
+class LocalRecipesRepository(private val dao: RecipeDao, private val prefsManager: PrefsManager<Int, Boolean>) : RepositoryDao {
 
     override fun getPreviewRecipes(): LiveData<List<PreviewRecipe>> {
         return dao.previewRecipes()
@@ -15,8 +16,8 @@ class LocalRecipesRepository(private val dao: RecipeDao) : RepositoryDao {
         return dao.getRecipeById(id)
     }
 
-    override suspend fun setFavoriteForRecipe(id: Int, currentState: Boolean) {
-        dao.setFavoriteForRecipe(id, !currentState)
+    override fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean {
+        return prefsManager.save(id, isFavorite)
     }
 
 }
