@@ -1,11 +1,13 @@
 package com.andalus.abomed7at55.mn_edek_a7la.prefs
 
 import android.content.Context
-import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.FAVORITE_PREFS_FILE_NAME
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.DUMB_PREFS_FILE
 
-class FavoritePrefs(context: Context) : PrefsManager<Int, Boolean> {
+class PrefsManagerImpl(private val context: Context) : PrefsManager<Int, Boolean> {
 
-    private val prefs = context.getSharedPreferences(FAVORITE_PREFS_FILE_NAME, Context.MODE_PRIVATE)
+    private var fileName = DUMB_PREFS_FILE
+
+    private var prefs = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
 
     override fun save(key: Int, value: Boolean): Boolean {
         if (prefs.getBoolean("$key", false) != value) {
@@ -16,12 +18,12 @@ class FavoritePrefs(context: Context) : PrefsManager<Int, Boolean> {
     }
 
     override fun load(): List<Int> {
-        val favoriteIds = mutableListOf<Int>()
+        val ids = mutableListOf<Int>()
         prefs.all.forEach {
             if (it.value == true)
-                favoriteIds.add(it.key.toInt())
+                ids.add(it.key.toInt())
         }
-        return favoriteIds
+        return ids
     }
 
     override fun invert(key: Int): Boolean {
@@ -31,6 +33,13 @@ class FavoritePrefs(context: Context) : PrefsManager<Int, Boolean> {
 
     override fun get(key: Int): Boolean {
         return prefs.getBoolean("$key", false)
+    }
+
+    override fun setPrefsFile(fileName: String) {
+        if (fileName != this.fileName) {
+            prefs = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+            this.fileName = fileName
+        }
     }
 
 }

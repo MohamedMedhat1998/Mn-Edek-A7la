@@ -14,6 +14,6 @@ data class Category(val title: String, val iconId: Int,
             recipesAdapter.notifyDataSetChanged()
         }
 
-    val recipesAdapter = RecipesAdapter(data, onClick, onOptionsClicked)
+    val recipesAdapter = RecipesAdapter(data = data,onClick = onClick,onOptionsClicked =  onOptionsClicked)
 
 }

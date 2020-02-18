@@ -31,16 +31,23 @@ object Constants {
     //prefs
     const val METADATA_FILE_NAME = "meta-data"
     const val FAVORITE_PREFS_FILE_NAME = "favorite-recipes"
+    const val DUMB_PREFS_FILE = "dumb"
 
     //services
     const val FILE_SERVICE = "file-service"
 
     //keys
     const val RECIPE_ID_KEY = "recipe-id"
+    const val SOURCE_KEY = "source-key"
+    const val SOURCE_FAVORITE = "source-favorite"
 
     //Preview
     const val PREVIEW_LIMIT = 8
 
     //others
     const val STRING_RESOURCE = "string"
+
+    //recipesAdapter
+    const val SIZE_SMALL = "small"
+    const val SIZE_LARGE = "large"
 }

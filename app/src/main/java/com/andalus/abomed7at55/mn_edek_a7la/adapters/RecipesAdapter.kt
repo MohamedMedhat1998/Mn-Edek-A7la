@@ -10,12 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.SIZE_LARGE
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.SIZE_SMALL
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.STRING_RESOURCE
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
 class RecipesAdapter(
         var data: List<PreviewRecipe> = listOf(),
+        var size: String = SIZE_SMALL,
         var onClick: (id: Int) -> Unit = {},
         var onOptionsClicked: (id: Int, optionsButton: View) -> Unit
 ) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
@@ -24,7 +27,14 @@ class RecipesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_recipe, parent, false)
+        val view = when (size) {
+            SIZE_SMALL ->
+                LayoutInflater.from(context).inflate(R.layout.item_recipe, parent, false)
+            SIZE_LARGE ->
+                LayoutInflater.from(context).inflate(R.layout.item_recipe_large, parent, false)
+            else ->
+                LayoutInflater.from(context).inflate(R.layout.item_recipe, parent, false)
+        }
         return RecipeHolder(view)
     }
 
@@ -57,7 +67,7 @@ class RecipesAdapter(
                 onClick.invoke(data[adapterPosition].id)
             }
             ibOptions.setOnClickListener {
-                onOptionsClicked.invoke(data[adapterPosition].id,it)
+                onOptionsClicked.invoke(data[adapterPosition].id, it)
             }
         }
 

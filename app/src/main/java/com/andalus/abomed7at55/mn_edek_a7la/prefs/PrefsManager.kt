@@ -6,8 +6,10 @@ interface PrefsManager<K, V> {
 
     fun load(): List<K>
 
-    fun invert(key: K) : V
+    fun invert(key: K): V
 
-    fun get(key: K) : V
+    fun get(key: K): V
+
+    fun setPrefsFile(fileName: String)
 
 }

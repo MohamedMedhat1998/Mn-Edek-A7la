@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -47,23 +48,24 @@ class DetailsActivity : AppCompatActivity() {
             }
             Glide.with(this).load(recipe.photoLink).placeholder(R.drawable.placeholder).into(ivRecipeImage)
         })
-
-        detailsViewModel.isFavorite.observe(this, Observer {
-            Toast.makeText(this, "observed, $it", Toast.LENGTH_SHORT).show()
-            if (it)
-                ibLove.setImageResource(R.drawable.ic_heart_solid)
-            else
-                ibLove.setImageResource(R.drawable.ic_heart)
-        })
-
-        //TODO fix favorite button
-        ibLove.setOnClickListener {
-            if (::recipe.isInitialized) {
-                detailsViewModel.switchFavoriteRecipes(recipe.id)
-                Toast.makeText(this, "ib clicked", Toast.LENGTH_SHORT).show()
+        if (intent.hasExtra(Constants.SOURCE_KEY)) {
+            if (intent.extras!!.getString(Constants.SOURCE_KEY) == Constants.SOURCE_FAVORITE) {
+                ibLove.visibility = View.INVISIBLE
+            }
+        } else {
+            detailsViewModel.isFavorite.observe(this, Observer {
+                Toast.makeText(this, "observed, $it", Toast.LENGTH_SHORT).show()
+                if (it)
+                    ibLove.setImageResource(R.drawable.ic_heart_solid)
+                else
+                    ibLove.setImageResource(R.drawable.ic_heart)
+            })
+            ibLove.setOnClickListener {
+                if (::recipe.isInitialized) {
+                    detailsViewModel.switchFavoriteRecipes(recipe.id)
+                }
             }
         }
-
     }
 
     private fun loadTags(tags: List<String>) {

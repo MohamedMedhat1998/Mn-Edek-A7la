@@ -7,6 +7,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
 import com.andalus.abomed7at55.mn_edek_a7la.model.FavoriteRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ import kotlin.coroutines.CoroutineContext
 class FavoriteRepositoryImpl(private val favoriteDao: FavoriteDao, private val prefsManager: PrefsManager<Int, Boolean>, private val recipeDao: RecipeDao) : FavoriteRepository, CoroutineScope {
 
     private val favoriteObserver = Observer<List<Int>> { currentIds ->
+        prefsManager.setPrefsFile(Constants.FAVORITE_PREFS_FILE_NAME)
         val correctData = prefsManager.load()
         val toRemoveIds = mutableListOf<Int>()
         val toInsertIds = mutableListOf<Int>()
@@ -74,6 +76,12 @@ class FavoriteRepositoryImpl(private val favoriteDao: FavoriteDao, private val p
 
     override fun getFavoritePreview(): LiveData<List<PreviewRecipe>> {
         return favoriteDao.getFavoritePreview()
+    }
+
+    override fun deleteFromFavorite(id: Int) {
+        launch {
+            favoriteDao.deleteFromFavorite(id)
+        }
     }
 
     override fun unSubscribe() {

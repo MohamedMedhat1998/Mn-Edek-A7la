@@ -36,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        nav_view.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
+            }
+            true
+        }
+
+
+
         categoriesAdapter = CategoriesAdapter(onRecipeClicked = {
             startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
         }, onOptionsClicked = { id, optionsButton ->
@@ -54,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.add_to_later -> {
                         //TODO remove this fake navigation
-                        startActivity(Intent(this, FavoriteActivity::class.java))
                         Toast.makeText(this, "Added to later", Toast.LENGTH_SHORT).show()
                     }
                 }

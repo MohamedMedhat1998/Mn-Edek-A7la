@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.andalus.abomed7at55.mn_edek_a7la.data.AppDatabase
 import com.andalus.abomed7at55.mn_edek_a7la.data.FavoriteDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
-import com.andalus.abomed7at55.mn_edek_a7la.prefs.FavoritePrefs
+import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManagerImpl
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepository
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepositoryImpl
@@ -38,7 +38,7 @@ val koinModule = module {
     single { provideDatabase(androidApplication()) }
     single { provideRecipeDao(get()) }
     single { provideFavoriteDao(get()) }
-    single { FavoritePrefs(androidContext()) as PrefsManager<Int, Boolean> }
+    single { PrefsManagerImpl(androidContext()) as PrefsManager<Int, Boolean> }
     single { LocalRecipesRepository(get(), get()) as RepositoryDao }
     single { FavoriteRepositoryImpl(get(), get(), get()) as FavoriteRepository }
     viewModel { MainViewModel(get(), androidApplication()) }

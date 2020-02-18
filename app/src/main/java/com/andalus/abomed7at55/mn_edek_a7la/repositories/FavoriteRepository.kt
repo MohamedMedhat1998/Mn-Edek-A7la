@@ -10,6 +10,8 @@ interface FavoriteRepository {
 
     fun getFavoritePreview(): LiveData<List<PreviewRecipe>>
 
+    fun deleteFromFavorite(id:Int)
+
     fun unSubscribe()
 
 }
