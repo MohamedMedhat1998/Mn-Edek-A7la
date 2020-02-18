@@ -12,4 +12,6 @@ interface RepositoryDao {
 
     fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean
 
+    fun getRecipeByCategory(category: String): LiveData<List<PreviewRecipe>>
+
 }

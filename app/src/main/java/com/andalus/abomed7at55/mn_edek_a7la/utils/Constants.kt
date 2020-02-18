@@ -14,9 +14,9 @@ object Constants {
     const val COLUMN_CATEGORY = "category"
     const val COLUMN_PHOTO_LINK = "photo_link"
     const val COLUMN_VIDEO_LINK = "video_link"
-    const val COLUMN_IS_FAVORITE = "is_favorite"
 
     //Categories
+    const val CATEGORY_KEY = "category"
     const val MEAT = "meat"
     const val FISH = "fish"
     const val SWEET = "sweet"

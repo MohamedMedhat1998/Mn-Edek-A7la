@@ -5,12 +5,13 @@ import androidx.room.Room
 import com.andalus.abomed7at55.mn_edek_a7la.data.AppDatabase
 import com.andalus.abomed7at55.mn_edek_a7la.data.FavoriteDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
-import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManagerImpl
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
+import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManagerImpl
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepository
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepositoryImpl
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.LocalRecipesRepository
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
+import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainViewModel
@@ -44,6 +45,7 @@ val koinModule = module {
     viewModel { MainViewModel(get(), androidApplication()) }
     viewModel { DetailsViewModel(get(), get()) }
     viewModel { FavoriteViewModel(get(), get()) }
+    viewModel { CategoryViewModel(get()) }
 
 }
 

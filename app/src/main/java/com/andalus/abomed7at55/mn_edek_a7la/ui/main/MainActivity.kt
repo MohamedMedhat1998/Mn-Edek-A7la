@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.CategoriesAdapter
+import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
@@ -45,9 +46,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        categoriesAdapter = CategoriesAdapter(onRecipeClicked = {
-            startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
-        }, onOptionsClicked = { id, optionsButton ->
+        categoriesAdapter = CategoriesAdapter(
+                onCategoryClicked = {
+                    startActivity(Intent(this, CategoryActivity::class.java).apply { putExtra(Constants.CATEGORY_KEY, it) })
+                },
+                onRecipeClicked = {
+                    startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
+                }, onOptionsClicked = { id, optionsButton ->
             //mainViewModel.setFavoriteRecipe(id, currentState)
             Toast.makeText(this, "Options for recipe number $id is clicked", Toast.LENGTH_SHORT).show()
 

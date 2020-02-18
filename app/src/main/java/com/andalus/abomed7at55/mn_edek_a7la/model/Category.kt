@@ -5,7 +5,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.adapters.RecipesAdapter
 
 data class Category(val title: String, val iconId: Int,
                     private val onClick: (id: Int) -> Unit = {},
-                    private val onOptionsClicked: (id: Int, optionsButton: View) -> Unit = { _, _ -> }) {
+                    private val onOptionsClicked: (id: Int, optionsButton: View) -> Unit = { _, _ -> }, val tag: String) {
 
     var data: List<PreviewRecipe> = listOf()
         set(value) {
@@ -14,6 +14,6 @@ data class Category(val title: String, val iconId: Int,
             recipesAdapter.notifyDataSetChanged()
         }
 
-    val recipesAdapter = RecipesAdapter(data = data,onClick = onClick,onOptionsClicked =  onOptionsClicked)
+    val recipesAdapter = RecipesAdapter(data = data, onClick = onClick, onOptionsClicked = onOptionsClicked)
 
 }

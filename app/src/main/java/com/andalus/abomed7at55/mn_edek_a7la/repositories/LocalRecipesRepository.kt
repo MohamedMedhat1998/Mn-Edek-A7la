@@ -22,4 +22,8 @@ class LocalRecipesRepository(private val dao: RecipeDao, private val prefsManage
         return prefsManager.save(id, isFavorite)
     }
 
+    override fun getRecipeByCategory(category: String): LiveData<List<PreviewRecipe>> {
+        return dao.getRecipeByCategory("%$category%")
+    }
+
 }

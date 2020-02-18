@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.item_category.view.*
 import java.io.Serializable
 
 class CategoriesAdapter(
+        private val onCategoryClicked: (category: String) -> Unit = {},
         var data: List<Category> = listOf(),
         private val onRecipeClicked: (id: Int) -> Unit = {},
         private val onOptionsClicked: (id: Int, optionsButton: View) -> Unit
@@ -55,6 +56,9 @@ class CategoriesAdapter(
             rvRecipes.onFlingListener = null
             val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(rvRecipes)
+            itemView.btnViewAll.setOnClickListener {
+                onCategoryClicked.invoke(data[adapterPosition].tag)
+            }
         }
     }
 }

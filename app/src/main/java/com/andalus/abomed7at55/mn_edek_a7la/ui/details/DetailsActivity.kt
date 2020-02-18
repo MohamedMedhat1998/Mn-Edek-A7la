@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
+import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.STRING_RESOURCE
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.content_details.*
@@ -73,10 +75,10 @@ class DetailsActivity : AppCompatActivity() {
         tags.reversed().forEach { title ->
             val inflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val tag = inflater.inflate(R.layout.item_tag, null)
-            tag.tvTagName.text = getString(resources.getIdentifier(title, "string", packageName))
+            tag.tvTagName.text = getString(resources.getIdentifier(title, STRING_RESOURCE, packageName))
             tag.setOnClickListener {
                 //TODO open category details
-                startActivity(Intent(this, MainActivity::class.java).apply { putExtra("tag", title) })
+                startActivity(Intent(this, CategoryActivity::class.java).apply { putExtra(Constants.CATEGORY_KEY, title) })
             }
             tagsHolder.addView(tag)
         }
