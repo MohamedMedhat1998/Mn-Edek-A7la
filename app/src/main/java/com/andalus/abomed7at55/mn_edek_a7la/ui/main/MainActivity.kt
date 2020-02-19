@@ -13,6 +13,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.adapters.CategoriesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
+import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -20,7 +21,6 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 //TODO fix api levels below 21
-//TODO add navigation to the favorite activity
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
+                R.id.nav_later -> startActivity(Intent(this, LaterActivity::class.java))
             }
             true
         }
@@ -53,8 +54,6 @@ class MainActivity : AppCompatActivity() {
                 onRecipeClicked = {
                     startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
                 }, onOptionsClicked = { id, optionsButton ->
-            //mainViewModel.setFavoriteRecipe(id, currentState)
-            Toast.makeText(this, "Options for recipe number $id is clicked", Toast.LENGTH_SHORT).show()
 
             val optionsPopup = PopupMenu(this, optionsButton)
             optionsPopup.menuInflater.inflate(R.menu.menu_recipe_options, optionsPopup.menu)
@@ -67,8 +66,10 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, getString(R.string.already_exists_in_favorite), Toast.LENGTH_SHORT).show()
                     }
                     R.id.add_to_later -> {
-                        //TODO remove this fake navigation
-                        Toast.makeText(this, "Added to later", Toast.LENGTH_SHORT).show()
+                        if (mainViewModel.setLaterRecipe(id, true))
+                            Toast.makeText(this, getString(R.string.added_to_later_successfully), Toast.LENGTH_SHORT).show()
+                        else
+                            Toast.makeText(this, getString(R.string.already_exists_in_later), Toast.LENGTH_SHORT).show()
                     }
                 }
                 true

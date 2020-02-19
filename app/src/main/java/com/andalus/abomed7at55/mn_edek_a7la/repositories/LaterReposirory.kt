@@ -2,9 +2,9 @@ package com.andalus.abomed7at55.mn_edek_a7la.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.andalus.abomed7at55.mn_edek_a7la.data.FavoriteDao
+import com.andalus.abomed7at55.mn_edek_a7la.data.LaterDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
-import com.andalus.abomed7at55.mn_edek_a7la.model.FavoriteRecipe
+import com.andalus.abomed7at55.mn_edek_a7la.model.LaterRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
@@ -13,10 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class FavoriteRepositoryImpl(private val favoriteDao: FavoriteDao, private val prefsManager: PrefsManager<Int, Boolean>, private val recipeDao: RecipeDao) : FavoriteRepository, CoroutineScope {
+class LaterReposirory(private val laterDao: LaterDao,private val prefsManager: PrefsManager<Int,Boolean>,private val recipeDao: RecipeDao) : PrefsRecipeRepository, CoroutineScope {
 
-    private val favoriteObserver = Observer<List<Int>> { currentIds ->
-        prefsManager.setPrefsFile(Constants.FAVORITE_PREFS_FILE_NAME)
+    private val laterObserver = Observer<List<Int>> { currentIds ->
+        prefsManager.setPrefsFile(Constants.LATER_PREFS_FILE_NAME)
         val correctData = prefsManager.load()
         val toRemoveIds = mutableListOf<Int>()
         val toInsertIds = mutableListOf<Int>()
@@ -54,38 +54,38 @@ class FavoriteRepositoryImpl(private val favoriteDao: FavoriteDao, private val p
             found = false
         }
 
-        val toInsertRecipes = mutableListOf<FavoriteRecipe>()
+        val toInsertRecipes = mutableListOf<LaterRecipe>()
 
         recipeDao.getRecipesById(toInsertIds).observeForever {
             it.forEach { recipe ->
-                toInsertRecipes.add(recipe.toFavoriteRecipe())
+                toInsertRecipes.add(recipe.toLaterRecipe())
             }
             launch {
-                favoriteDao.addToFavorite(toInsertRecipes)
+                laterDao.addToLater(toInsertRecipes)
             }
         }
         launch {
-            favoriteDao.deleteFromFavorite(toRemoveIds)
+            laterDao.deleteFromLater(toRemoveIds)
         }
 
     }
 
     override fun subscribe() {
-        favoriteDao.getFavoriteIds().observeForever(favoriteObserver)
+        laterDao.getLaterIds().observeForever(laterObserver)
     }
 
-    override fun getFavoritePreview(): LiveData<List<PreviewRecipe>> {
-        return favoriteDao.getFavoritePreview()
+    override fun getPreviewRecipes(): LiveData<List<PreviewRecipe>> {
+        return laterDao.getLaterPreview()
     }
 
-    override fun deleteFromFavorite(id: Int) {
+    override fun deleteRecipe(id: Int) {
         launch {
-            favoriteDao.deleteFromFavorite(id)
+            laterDao.deleteFromLater(id)
         }
     }
 
     override fun unSubscribe() {
-        favoriteDao.getFavoriteIds().removeObserver(favoriteObserver)
+        laterDao.getLaterIds().removeObserver(laterObserver)
     }
 
     override val coroutineContext: CoroutineContext

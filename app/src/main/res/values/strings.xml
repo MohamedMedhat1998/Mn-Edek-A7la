@@ -39,5 +39,9 @@
     <string name="added_to_favorite_successfully">تمت الاضافة الى المفضلة بنجاح</string>
     <string name="already_exists_in_favorite">مضاف بالفعل في المفضلة</string>
     <string name="delete_from_favorite">حذف من المفضلة</string>
+    <string name="added_to_later_successfully">تمت الاضافة الى المشاهدة لاحقاً بنجاح</string>
+    <string name="already_exists_in_later">مضاف بالفعل في المشاهدة لاحقاً</string>
+    <string name="delete_from_later">حذف من المشاهدة لاحقاً</string>
+    <string name="watch_later">المشاهدة لاحقاً</string>
 
 </resources>

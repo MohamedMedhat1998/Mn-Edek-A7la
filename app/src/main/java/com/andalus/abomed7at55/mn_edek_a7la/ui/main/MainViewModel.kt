@@ -8,15 +8,15 @@ import androidx.lifecycle.ViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
 
-class MainViewModel(private val repository: RepositoryDao, context: Context) : ViewModel() {
+class MainViewModel(private val recipeRepository: RecipeRepository, context: Context) : ViewModel() {
 
     private val dumb = MutableLiveData<Int>()
     private val recipes = switchMap(dumb) {
-        repository.getPreviewRecipes()
+        recipeRepository.getPreviewRecipes()
     }
 
     val categories = MediatorLiveData<List<Category>>()
@@ -70,7 +70,11 @@ class MainViewModel(private val repository: RepositoryDao, context: Context) : V
     }
 
     fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean {
-        return repository.setFavoriteRecipe(id, isFavorite)
+        return recipeRepository.setFavoriteRecipe(id, isFavorite)
+    }
+
+    fun setLaterRecipe(id: Int, isLater: Boolean): Boolean {
+        return recipeRepository.setLaterRecipe(id, isLater)
     }
 
 }

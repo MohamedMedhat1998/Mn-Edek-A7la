@@ -3,16 +3,16 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.details
 import androidx.lifecycle.*
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
-class DetailsViewModel(private val repository: RepositoryDao, private val prefsManager: PrefsManager<Int, Boolean>) : ViewModel() {
+class DetailsViewModel(private val recipeRepository: RecipeRepository, private val prefsManager: PrefsManager<Int, Boolean>) : ViewModel() {
 
     private var loaded = false
 
     private val _id = MutableLiveData<Int>()
     val recipe: LiveData<Recipe> = Transformations.switchMap(_id) {
-        repository.getRecipeById(it)
+        recipeRepository.getRecipeById(it)
     }
 
     val isFavorite = MediatorLiveData<Boolean>()
@@ -32,7 +32,7 @@ class DetailsViewModel(private val repository: RepositoryDao, private val prefsM
 
     fun switchFavoriteRecipes(id: Int) {
         prefsManager.setPrefsFile(Constants.FAVORITE_PREFS_FILE_NAME)
-        repository.setFavoriteRecipe(id, prefsManager.get(id))
+        recipeRepository.setFavoriteRecipe(id, prefsManager.get(id))
         this.isFavorite.value = prefsManager.invert(id)
     }
 

@@ -4,16 +4,15 @@ import android.app.Application
 import androidx.room.Room
 import com.andalus.abomed7at55.mn_edek_a7la.data.AppDatabase
 import com.andalus.abomed7at55.mn_edek_a7la.data.FavoriteDao
+import com.andalus.abomed7at55.mn_edek_a7la.data.LaterDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManagerImpl
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepository
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.FavoriteRepositoryImpl
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.LocalRecipesRepository
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.RepositoryDao
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.*
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteViewModel
+import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import org.koin.android.ext.koin.androidApplication
@@ -36,15 +35,34 @@ val koinModule = module {
         return database.favoriteDao
     }
 
+    fun provideLaterDao(database: AppDatabase): LaterDao {
+        return database.laterDao
+    }
+
+    fun provideFavoritePrefsRepo(favoriteDao: FavoriteDao, prefsManager: PrefsManager<Int, Boolean>, recipeDao: RecipeDao): PrefsRecipeRepository {
+        return FavoriteRepository(favoriteDao, prefsManager, recipeDao)
+    }
+
+    fun provideLaterPrefsRepo(laterDao: LaterDao, prefsManager: PrefsManager<Int, Boolean>, recipeDao: RecipeDao): PrefsRecipeRepository {
+        return LaterReposirory(laterDao, prefsManager, recipeDao)
+    }
+
     single { provideDatabase(androidApplication()) }
     single { provideRecipeDao(get()) }
     single { provideFavoriteDao(get()) }
+    single { provideLaterDao(get()) }
+
     single { PrefsManagerImpl(androidContext()) as PrefsManager<Int, Boolean> }
-    single { LocalRecipesRepository(get(), get()) as RepositoryDao }
-    single { FavoriteRepositoryImpl(get(), get(), get()) as FavoriteRepository }
+    single { LocalRecipeRepository(get(), get()) as RecipeRepository }
+
     viewModel { MainViewModel(get(), androidApplication()) }
+
     viewModel { DetailsViewModel(get(), get()) }
-    viewModel { FavoriteViewModel(get(), get()) }
+
+    viewModel { FavoriteViewModel(provideFavoritePrefsRepo(get(), get(), get()), get()) }
+
+    viewModel { LaterViewModel(provideLaterPrefsRepo(get(), get(), get()), get()) }
+
     viewModel { CategoryViewModel(get()) }
 
 }

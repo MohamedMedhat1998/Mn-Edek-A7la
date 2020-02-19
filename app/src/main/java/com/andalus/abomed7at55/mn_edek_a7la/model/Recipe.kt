@@ -20,7 +20,7 @@ data class Recipe(@ColumnInfo(name = COLUMN_ID) @PrimaryKey val id: Int,
                   @ColumnInfo(name = COLUMN_PHOTO_LINK) val photoLink: String,
                   @ColumnInfo(name = COLUMN_VIDEO_LINK) val videoLink: String) {
 
-    fun toFavoriteRecipe(): FavoriteRecipe {
-        return FavoriteRecipe(id, title, ingredients, steps, category, photoLink, videoLink)
-    }
+    fun toFavoriteRecipe() = FavoriteRecipe(id, title, ingredients, steps, category, photoLink, videoLink)
+    fun toLaterRecipe() = LaterRecipe(id, title, ingredients, steps, category, photoLink, videoLink)
+
 }

@@ -1,4 +1,4 @@
-package com.andalus.abomed7at55.mn_edek_a7la.ui.favorite
+package com.andalus.abomed7at55.mn_edek_a7la.ui.later
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,42 +10,39 @@ import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.RecipesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
-import kotlinx.android.synthetic.main.activity_favorite.*
+import kotlinx.android.synthetic.main.activity_later.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 //TODO change the title of the activity
-class FavoriteActivity : AppCompatActivity() {
+class LaterActivity : AppCompatActivity() {
 
-    private val favoriteViewModel: FavoriteViewModel by viewModel()
+    private val laterViewModel: LaterViewModel by viewModel()
 
     private lateinit var recipesAdapter: RecipesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorite)
+        setContentView(R.layout.activity_later)
 
         recipesAdapter = RecipesAdapter(size = Constants.SIZE_LARGE, onClick = {
-            startActivity(Intent(this, DetailsActivity::class.java)
-                    .apply {
-                        putExtra(Constants.RECIPE_ID_KEY, it)
-                        putExtra(Constants.SOURCE_KEY, Constants.SOURCE_FAVORITE)
-                    })
+            startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
         }, onOptionsClicked = { id, button ->
             val optionsPopup = PopupMenu(this, button)
-            optionsPopup.menuInflater.inflate(R.menu.menu_favorite_options, optionsPopup.menu)
+            optionsPopup.menuInflater.inflate(R.menu.menu_later_options, optionsPopup.menu)
             optionsPopup.setOnMenuItemClickListener {
-                if (it.itemId == R.id.delete_from_favorite) {
-                    favoriteViewModel.deleteFromFavorite(id)
+                if (it.itemId == R.id.delete_from_later) {
+                    laterViewModel.deleteFromLater(id)
                 }
                 true
             }
             optionsPopup.show()
         })
 
-        rvFavoriteRecipes.adapter = recipesAdapter
-        rvFavoriteRecipes.layoutManager = LinearLayoutManager(this)
 
-        favoriteViewModel.favoriteRecipes.observe(this, Observer {
+        rvLaterRecipes.adapter = recipesAdapter
+        rvLaterRecipes.layoutManager = LinearLayoutManager(this)
+
+        laterViewModel.laterRecipes.observe(this, Observer {
             recipesAdapter.data = it
             recipesAdapter.notifyDataSetChanged()
         })
