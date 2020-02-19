@@ -23,7 +23,7 @@
     <string name="title_activity_details">DetailsActivity</string>
     <string name="ingredients">المقادير:</string>
     <string name="steps">الخطوات:</string>
-    <string name="search">بحث …</string>
+    <string name="search">بحث…</string>
     <string name="favorite">المفضلة</string>
     <string name="watch_video">مشاهدة الفيديو</string>
     <string name="recent">المضاف حديثاً</string>
@@ -43,5 +43,6 @@
     <string name="already_exists_in_later">مضاف بالفعل في المشاهدة لاحقاً</string>
     <string name="delete_from_later">حذف من المشاهدة لاحقاً</string>
     <string name="watch_later">المشاهدة لاحقاً</string>
+    <string name="please_enter_keyword">برجاء ادخال كلمة البحث</string>
 
 </resources>

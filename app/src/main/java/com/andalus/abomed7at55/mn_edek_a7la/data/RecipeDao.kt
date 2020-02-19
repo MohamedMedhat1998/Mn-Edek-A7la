@@ -23,4 +23,7 @@ interface RecipeDao {
     @Query("SELECT id,title,category,photo_link FROM Recipe WHERE category LIKE :category")
     fun getRecipeByCategory(category: String): LiveData<List<PreviewRecipe>>
 
+    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE title LIKE :keyword")
+    fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>>
+
 }

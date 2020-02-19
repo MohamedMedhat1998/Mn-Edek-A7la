@@ -2,7 +2,7 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.later
 
 import androidx.lifecycle.ViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.PrefsRecipeRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.prefs_based.PrefsRecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
 class LaterViewModel(private val laterRepository: PrefsRecipeRepository, private val prefsManager: PrefsManager<Int, Boolean>) : ViewModel() {

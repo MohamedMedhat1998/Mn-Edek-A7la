@@ -2,6 +2,8 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +29,27 @@ class CategoryActivity : AppCompatActivity() {
 
         recipesAdapter = RecipesAdapter(size = Constants.SIZE_LARGE, onClick = {
             startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })
-        }, onOptionsClicked = { id, button ->
-            //TODO create the popup menu like the one in the main activity
+        }, onOptionsClicked = { id, optionsButton ->
+            val optionsPopup = PopupMenu(this, optionsButton)
+            optionsPopup.menuInflater.inflate(R.menu.menu_recipe_options, optionsPopup.menu)
+            optionsPopup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.add_to_favorite -> {
+                        if (categoryViewModel.setFavoriteRecipe(id, true))
+                            Toast.makeText(this, getString(R.string.added_to_favorite_successfully), Toast.LENGTH_SHORT).show()
+                        else
+                            Toast.makeText(this, getString(R.string.already_exists_in_favorite), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.add_to_later -> {
+                        if (categoryViewModel.setLaterRecipe(id, true))
+                            Toast.makeText(this, getString(R.string.added_to_later_successfully), Toast.LENGTH_SHORT).show()
+                        else
+                            Toast.makeText(this, getString(R.string.already_exists_in_later), Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+            optionsPopup.show()
         })
         rvCategory.adapter = recipesAdapter
         rvCategory.layoutManager = LinearLayoutManager(this)

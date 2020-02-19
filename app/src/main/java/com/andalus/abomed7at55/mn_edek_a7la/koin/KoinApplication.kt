@@ -8,12 +8,17 @@ import com.andalus.abomed7at55.mn_edek_a7la.data.LaterDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManagerImpl
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.*
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.prefs_based.FavoriteRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.prefs_based.LaterReposirory
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.prefs_based.PrefsRecipeRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.LocalRecipeRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainViewModel
+import com.andalus.abomed7at55.mn_edek_a7la.ui.search.SearchViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -64,6 +69,8 @@ val koinModule = module {
     viewModel { LaterViewModel(provideLaterPrefsRepo(get(), get(), get()), get()) }
 
     viewModel { CategoryViewModel(get()) }
+
+    viewModel { SearchViewModel(get()) }
 
 }
 

@@ -2,8 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
@@ -21,25 +21,36 @@
 
             <LinearLayout
                 android:id="@+id/dummy"
-                android:orientation="horizontal"
                 android:layout_width="0px"
                 android:layout_height="0px"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal" />
+
+            <ImageButton
+                android:id="@+id/ibSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_search_black_24dp" />
 
             <EditText
-                android:id="@+id/et_search_cat_act"
+                android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/search_background"
-                android:hint="@string/search"
-                android:nextFocusUp="@id/et_search_cat_act"
-                android:nextFocusLeft="@id/et_search_cat_act"
                 android:cursorVisible="false"
+                android:hint="@string/search"
+                android:nextFocusLeft="@id/etSearch"
+                android:nextFocusUp="@id/etSearch"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp" />
-
 
         </androidx.appcompat.widget.Toolbar>
 

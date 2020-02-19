@@ -41,6 +41,7 @@ object Constants {
     const val RECIPE_ID_KEY = "recipe-id"
     const val SOURCE_KEY = "source-key"
     const val SOURCE_FAVORITE = "source-favorite"
+    const val SEARCH_KEYWORD = "search-keyword"
 
     //Preview
     const val PREVIEW_LIMIT = 8

@@ -1,4 +1,4 @@
-package com.andalus.abomed7at55.mn_edek_a7la.repositories
+package com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe
 
 import androidx.lifecycle.LiveData
 import com.andalus.abomed7at55.mn_edek_a7la.data.RecipeDao
@@ -24,11 +24,15 @@ class LocalRecipeRepository(private val dao: RecipeDao, private val prefsManager
 
     override fun setLaterRecipe(id: Int, isLater: Boolean): Boolean {
         prefsManager.setPrefsFile(Constants.LATER_PREFS_FILE_NAME)
-        return prefsManager.save(id,isLater)
+        return prefsManager.save(id, isLater)
     }
 
     override fun getRecipeByCategory(category: String): LiveData<List<PreviewRecipe>> {
         return dao.getRecipeByCategory("%$category%")
+    }
+
+    override fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>> {
+        return dao.searchForRecipe("%$keyword%")
     }
 
 }

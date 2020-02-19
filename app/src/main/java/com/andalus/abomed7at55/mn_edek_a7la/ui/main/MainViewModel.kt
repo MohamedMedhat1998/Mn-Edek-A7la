@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.RecipeRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
 

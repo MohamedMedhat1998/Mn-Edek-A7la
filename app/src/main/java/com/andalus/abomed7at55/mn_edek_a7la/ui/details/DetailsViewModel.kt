@@ -3,7 +3,7 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.details
 import androidx.lifecycle.*
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.andalus.abomed7at55.mn_edek_a7la.prefs.PrefsManager
-import com.andalus.abomed7at55.mn_edek_a7la.repositories.RecipeRepository
+import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
 class DetailsViewModel(private val recipeRepository: RecipeRepository, private val prefsManager: PrefsManager<Int, Boolean>) : ViewModel() {

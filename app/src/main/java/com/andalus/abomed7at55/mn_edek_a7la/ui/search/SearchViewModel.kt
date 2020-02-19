@@ -1,19 +1,20 @@
-package com.andalus.abomed7at55.mn_edek_a7la.ui.category
+package com.andalus.abomed7at55.mn_edek_a7la.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.RecipeRepository
 
-class CategoryViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
+class SearchViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
 
-    private val _category = MutableLiveData<String>()
-    val recipes = Transformations.switchMap(_category) {
-        recipeRepository.getRecipeByCategory(it)
+    private val _keyword = MutableLiveData<String>()
+
+    val recipes = Transformations.switchMap(_keyword) {
+        recipeRepository.searchForRecipe(it)
     }
 
-    fun setCategory(category: String) {
-        _category.value = category
+    fun search(keyword: String) {
+        _keyword.value = keyword
     }
 
     fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean {
@@ -23,5 +24,4 @@ class CategoryViewModel(private val recipeRepository: RecipeRepository) : ViewMo
     fun setLaterRecipe(id: Int, isLater: Boolean): Boolean {
         return recipeRepository.setLaterRecipe(id, isLater)
     }
-
 }

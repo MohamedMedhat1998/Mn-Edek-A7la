@@ -6,6 +6,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andalus.abomed7at55.mn_edek_a7la.R
@@ -14,6 +15,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterActivity
+import com.andalus.abomed7at55.mn_edek_a7la.ui.search.SearchActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -45,7 +47,12 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
+        ibSearch.setOnClickListener {
+            if (etSearch.text.toString() == "")
+                Toast.makeText(this, getString(R.string.please_enter_keyword), Toast.LENGTH_LONG).show()
+            else
+                startActivity(Intent(this, SearchActivity::class.java).apply { putExtra(Constants.SEARCH_KEYWORD, etSearch.text.toString()) })
+        }
 
         categoriesAdapter = CategoriesAdapter(
                 onCategoryClicked = {
@@ -87,6 +94,13 @@ class MainActivity : AppCompatActivity() {
             categoriesAdapter.notifyDataSetChanged()
         })
 
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START)
+        else
+            super.onBackPressed()
     }
 
 }
