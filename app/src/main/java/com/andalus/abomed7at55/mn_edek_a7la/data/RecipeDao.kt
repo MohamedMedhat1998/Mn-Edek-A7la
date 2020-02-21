@@ -2,12 +2,14 @@ package com.andalus.abomed7at55.mn_edek_a7la.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 
 @Dao
 interface RecipeDao {
+
     @Query("SELECT id,title,category,photo_link FROM Recipe")
     fun previewRecipes(): LiveData<List<PreviewRecipe>>
 
@@ -25,5 +27,14 @@ interface RecipeDao {
 
     @Query("SELECT id,title,category,photo_link FROM Recipe WHERE title LIKE :keyword")
     fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>>
+
+    @Insert
+    suspend fun insert(recipe: Recipe)
+
+    @Insert
+    suspend fun insert(recipes: List<Recipe>)
+
+    @Query("SELECT MAX(id) FROM Recipe")
+    fun getLastId(): LiveData<Int>
 
 }

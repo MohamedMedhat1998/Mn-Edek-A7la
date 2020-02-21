@@ -12,7 +12,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.search.SearchActivity"></activity>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.later.LaterActivity" />
         <activity android:name=".ui.category.CategoryActivity" />
         <activity android:name=".ui.favorite.FavoriteActivity" />
@@ -56,6 +56,7 @@
             </intent-filter>
         </service>
         <service android:name=".services.FileManagerService" />
+        <service android:name=".services.SynchronizationService" />
     </application>
 
 </manifest>

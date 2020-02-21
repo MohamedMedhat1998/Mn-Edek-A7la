@@ -18,4 +18,10 @@ interface RecipeRepository {
 
     fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>>
 
+    suspend fun insert(recipe: Recipe)
+
+    suspend fun insert(recipes: List<Recipe>)
+
+    fun getLastId(): LiveData<Int>
+
 }

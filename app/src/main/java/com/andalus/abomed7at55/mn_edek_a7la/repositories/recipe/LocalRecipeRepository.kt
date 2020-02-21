@@ -35,4 +35,16 @@ class LocalRecipeRepository(private val dao: RecipeDao, private val prefsManager
         return dao.searchForRecipe("%$keyword%")
     }
 
+    override suspend fun insert(recipe: Recipe) {
+        dao.insert(recipe)
+    }
+
+    override suspend fun insert(recipes: List<Recipe>) {
+        dao.insert(recipes)
+    }
+
+    override fun getLastId(): LiveData<Int> {
+        return dao.getLastId()
+    }
+
 }

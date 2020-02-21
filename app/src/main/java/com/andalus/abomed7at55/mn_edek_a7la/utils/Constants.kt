@@ -36,6 +36,7 @@ object Constants {
 
     //services
     const val FILE_SERVICE = "file-service"
+    const val SYNC_SERVICE = "sync-service"
 
     //keys
     const val RECIPE_ID_KEY = "recipe-id"
@@ -52,4 +53,10 @@ object Constants {
     //recipesAdapter
     const val SIZE_SMALL = "small"
     const val SIZE_LARGE = "large"
+
+    //IntentActions
+    const val ACTION_DATABASE_SERVICE_COMPLETE = "com.andalus.abomed7at55.mn_edek_a7la-database-copied"
+
+    //Networking
+    const val BASE_URL = "https://men-edek-a7la.herokuapp.com/recipes/"
 }
