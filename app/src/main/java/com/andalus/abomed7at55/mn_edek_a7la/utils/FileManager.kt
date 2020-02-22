@@ -17,8 +17,10 @@ object FileManager {
         Log.d("NEW VERSION", AppDatabase.NEW_VERSION.toString() + "")
         Log.d("CURRENT VERSION", AppDatabase.currentVersion.toString() + "")
 
-        if (AppDatabase.currentVersion < AppDatabase.NEW_VERSION) {
-            val sharedPreferences = context.getSharedPreferences(Constants.METADATA_FILE_NAME, Context.MODE_PRIVATE).edit()
+        val sharedPreferences = context.getSharedPreferences(Constants.METADATA_FILE_NAME, Context.MODE_PRIVATE).edit()
+        val currentVersion = context.getSharedPreferences(Constants.METADATA_FILE_NAME, Context.MODE_PRIVATE).getInt(Constants.VERSION_KEY, -1)
+
+        if (currentVersion < AppDatabase.NEW_VERSION) {
             sharedPreferences.putInt(Constants.VERSION_KEY, AppDatabase.NEW_VERSION)
             sharedPreferences.apply()
 

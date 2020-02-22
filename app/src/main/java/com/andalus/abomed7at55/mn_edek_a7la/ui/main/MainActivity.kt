@@ -1,6 +1,7 @@
 package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 //TODO fix api levels below 21
+//TODO add a broadcast receiver for the internet
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -43,6 +45,18 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.nav_favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
                 R.id.nav_later -> startActivity(Intent(this, LaterActivity::class.java))
+                R.id.nav_youtube -> startActivity(Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(Constants.YOUTUBE_SUBSCRIPTION_LINK)
+                })
+                R.id.nav_facebook_page -> startActivity(Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(Constants.FACEBOOK_PAGE_LINK)
+                })
+                R.id.nav_facebook_group -> startActivity(Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(Constants.FACEBOOK_GROUP_LINK)
+                })
             }
             true
         }

@@ -59,4 +59,9 @@ object Constants {
 
     //Networking
     const val BASE_URL = "https://men-edek-a7la.herokuapp.com/recipes/"
+
+    //links
+    const val YOUTUBE_SUBSCRIPTION_LINK = "https://www.youtube.com/channel/UCck1oeRJ5a--yWmwFB2aoFQ?sub_confirmation=1"
+    const val FACEBOOK_PAGE_LINK = "https://www.facebook.com/MenEdikAhla/"
+    const val FACEBOOK_GROUP_LINK = "https://www.facebook.com/groups/MenEdikAhla/"
 }

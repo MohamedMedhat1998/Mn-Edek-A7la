@@ -77,7 +77,6 @@ class DetailsActivity : AppCompatActivity() {
             val tag = inflater.inflate(R.layout.item_tag, null)
             tag.tvTagName.text = getString(resources.getIdentifier(title, STRING_RESOURCE, packageName))
             tag.setOnClickListener {
-                //TODO open category details
                 startActivity(Intent(this, CategoryActivity::class.java).apply { putExtra(Constants.CATEGORY_KEY, title) })
             }
             tagsHolder.addView(tag)

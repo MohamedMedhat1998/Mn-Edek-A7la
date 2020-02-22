@@ -13,6 +13,8 @@
     <color name="Black_Transparent">#61000000</color>
     <color name="Black">#000000</color>
 
+    <color name="Grey100">#F5F5F5</color>
+
 
     <color name="Deep_Purple_50">#EDE7F6</color>
     <color name="Deep_Purple_100">#D1C4E9</color>

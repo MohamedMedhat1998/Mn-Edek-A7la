@@ -31,7 +31,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
         registerReceiver(dbReceiver, IntentFilter(ACTION_DATABASE_SERVICE_COMPLETE))
 
-        startService(Intent(this, FileManagerService::class.java))
 
         Glide.with(this).load(R.drawable.logo).apply(RequestOptions.circleCropTransform()).into(ivLogo)
         /*val runnable = Runnable {
@@ -40,6 +39,8 @@ class SplashScreenActivity : AppCompatActivity() {
         }
         val handler = Handler()
         handler.postDelayed(runnable, DELAY.toLong())*/
+        startService(Intent(this, FileManagerService::class.java))
+
     }
 
     override fun onDestroy() {

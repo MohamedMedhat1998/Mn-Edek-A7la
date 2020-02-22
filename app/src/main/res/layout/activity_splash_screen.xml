@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.splash.SplashScreenActivity"
     android:layout_width="match_parent"
+    android:background="@color/PinkA700"
     android:layout_height="match_parent">
 
     <ImageView
@@ -21,8 +22,11 @@
 
     <TextView
         android:id="@+id/tvAppName"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:textStyle="bold"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
