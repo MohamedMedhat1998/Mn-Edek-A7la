@@ -36,7 +36,6 @@ object Constants {
 
     //services
     const val FILE_SERVICE = "file-service"
-    const val SYNC_SERVICE = "sync-service"
 
     //keys
     const val RECIPE_ID_KEY = "recipe-id"

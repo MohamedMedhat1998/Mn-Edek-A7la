@@ -11,3 +11,5 @@
 /app/src/main/assets/Food.db
 /mn-edek-a7la-keystore.jks
 /app/google-services.json
+/app/src/main/res/values/secrets.xml
+/app/src/main/java/com/andalus/abomed7at55/mn_edek_a7la/utils/Secrets.kt

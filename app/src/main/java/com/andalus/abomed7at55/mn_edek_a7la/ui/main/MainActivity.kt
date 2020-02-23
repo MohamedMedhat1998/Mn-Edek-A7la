@@ -1,6 +1,7 @@
 package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.PopupMenu
@@ -12,28 +13,40 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.CategoriesAdapter
+import com.andalus.abomed7at55.mn_edek_a7la.broadcast_receivers.NetworkStateReceiver
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.search.SearchActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+const val CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
+
 //TODO fix api levels below 21
-//TODO add a broadcast receiver for the internet
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
 
     private lateinit var categoriesAdapter: CategoriesAdapter
 
+    private val networkStateReceiver = NetworkStateReceiver()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        registerReceiver(networkStateReceiver, IntentFilter(CONNECTIVITY_ACTION))
+
+        MobileAds.initialize(applicationContext, getString(R.string.ADMOB_APP_ID))
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
 
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
@@ -115,6 +128,11 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         else
             super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(networkStateReceiver)
+        super.onDestroy()
     }
 
 }
