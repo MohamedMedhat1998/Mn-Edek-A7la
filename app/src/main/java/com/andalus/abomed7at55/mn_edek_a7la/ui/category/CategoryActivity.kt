@@ -3,7 +3,9 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.category
 import android.content.Intent
 import android.os.Bundle
 import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,10 +13,10 @@ import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.RecipesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import kotlinx.android.synthetic.main.action_bar_right_gravity.view.*
 import kotlinx.android.synthetic.main.activity_category.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-//TODO change the title of this activity to the correct category name
 class CategoryActivity : AppCompatActivity() {
 
     private val categoryViewModel: CategoryViewModel by viewModel()
@@ -24,8 +26,10 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        //TODO get the recipe from opening activity
         val category = intent.extras!!.getString(Constants.CATEGORY_KEY)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.action_bar_right_gravity)
+        supportActionBar?.customView?.tvTitle?.text = getString(resources.getIdentifier(category, Constants.STRING_RESOURCE, packageName))
 
         recipesAdapter = RecipesAdapter(size = Constants.SIZE_LARGE, onClick = {
             startActivity(Intent(this, DetailsActivity::class.java).apply { putExtra(Constants.RECIPE_ID_KEY, it) })

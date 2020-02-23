@@ -56,7 +56,6 @@ class DetailsActivity : AppCompatActivity() {
             }
         } else {
             detailsViewModel.isFavorite.observe(this, Observer {
-                Toast.makeText(this, "observed, $it", Toast.LENGTH_SHORT).show()
                 if (it)
                     ibLove.setImageResource(R.drawable.ic_heart_solid)
                 else

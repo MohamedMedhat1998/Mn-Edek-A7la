@@ -48,5 +48,9 @@
     <string name="subscribe">الاشتراك في القناة</string>
     <string name="facebook_page">صفحة الفيسبوك</string>
     <string name="group">المجموعة</string>
+    <string name="no_saved_items">لا يوجد عناصر محفوظة</string>
+    <string name="no_search_results">لم يتم العثور على نتائج البحث</string>
+    <string name="search_result_for">نتائج البحث عن: %s</string>
+
 
 </resources>

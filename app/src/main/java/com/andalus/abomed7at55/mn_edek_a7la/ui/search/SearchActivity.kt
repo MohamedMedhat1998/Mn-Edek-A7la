@@ -2,8 +2,10 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +13,10 @@ import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.RecipesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import kotlinx.android.synthetic.main.action_bar_right_gravity.view.*
+import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.tvNoItems
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
@@ -24,6 +29,10 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         val keyword = intent.extras!!.getString(Constants.SEARCH_KEYWORD)
+
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.action_bar_right_gravity)
+        supportActionBar?.customView?.tvTitle?.text = getString(R.string.search_result_for,keyword)
 
         recipesAdapter = RecipesAdapter(size = Constants.SIZE_LARGE,
                 onClick = {
@@ -59,6 +68,12 @@ class SearchActivity : AppCompatActivity() {
         searchViewModel.search(keyword!!)
 
         searchViewModel.recipes.observe(this, Observer {
+
+            if (it.isEmpty())
+                tvNoItems.visibility = View.VISIBLE
+            else
+                tvNoItems.visibility = View.INVISIBLE
+
             recipesAdapter.data = it
             recipesAdapter.notifyDataSetChanged()
         })
