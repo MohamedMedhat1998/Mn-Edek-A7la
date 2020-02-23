@@ -5,8 +5,8 @@ class RemoteRecipe(val id: Int,
                    val ingredients: String,
                    val steps: String,
                    val category: List<String>,
-                   val photo_link: String,
-                   val video_link: String) {
+                   private val photo_link: String,
+                   private val video_link: String) {
 
     fun toRecipe(): Recipe {
         val categoryBuilder = StringBuilder()

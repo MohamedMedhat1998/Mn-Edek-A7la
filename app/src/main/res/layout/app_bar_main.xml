@@ -36,7 +36,8 @@
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_search_black_24dp" />
+                android:src="@drawable/ic_search_black_24dp"
+                tools:ignore="ContentDescription" />
 
             <EditText
                 android:id="@+id/etSearch"

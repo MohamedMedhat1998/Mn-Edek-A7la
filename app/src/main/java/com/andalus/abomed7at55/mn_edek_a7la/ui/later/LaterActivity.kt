@@ -13,9 +13,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.adapters.RecipesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import kotlinx.android.synthetic.main.action_bar_right_gravity.view.*
-import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_later.*
-import kotlinx.android.synthetic.main.activity_later.tvNoItems
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LaterActivity : AppCompatActivity() {

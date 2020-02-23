@@ -10,22 +10,22 @@ import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 @Dao
 interface RecipeDao {
 
-    @Query("SELECT id,title,category,photo_link FROM Recipe")
+    @Query("SELECT id,title,category,photo_link FROM Recipe ORDER BY id DESC")
     fun previewRecipes(): LiveData<List<PreviewRecipe>>
 
     @Query("SELECT * FROM Recipe WHERE id = :id ")
     fun getRecipeById(id: Int): LiveData<Recipe>
 
-    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE id in (:ids)")
+    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE id in (:ids) ORDER BY id DESC")
     fun getPreviewRecipesByIds(ids: List<Int>): LiveData<List<PreviewRecipe>>
 
     @Query("SELECT * FROM Recipe WHERE id in (:ids)")
     fun getRecipesById(ids: List<Int>): LiveData<List<Recipe>>
 
-    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE category LIKE :category")
+    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE category LIKE :category ORDER BY id DESC")
     fun getRecipeByCategory(category: String): LiveData<List<PreviewRecipe>>
 
-    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE title LIKE :keyword")
+    @Query("SELECT id,title,category,photo_link FROM Recipe WHERE title LIKE :keyword ORDER BY id DESC")
     fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>>
 
     @Insert

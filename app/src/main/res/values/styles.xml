@@ -12,20 +12,6 @@
         <item name="colorPrimaryDark">@color/PinkA700</item>
     </style>
 
-    <style name="DetailsActivityTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/Black</item>
-        <item name="colorPrimaryDark">@color/Black</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="SplashScreenTextStyle">
-        <item name="android:textColor">@color/Black</item>
-        <item name="android:textSize">@dimen/splash_screen_text_size</item>
-    </style>
-
     <style name="SplashScreenLogoStyle">
         <item name="android:layout_width">@dimen/splash_screen_logo_dim</item>
         <item name="android:layout_height">@dimen/splash_screen_logo_dim</item>
@@ -39,25 +25,6 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-
-    <style name="CategoryItemTextStyle">
-        <item name="android:textColor">@color/Black</item>
-        <item name="android:layout_marginBottom">8dp</item>
-    </style>
-
-    <style name="DetailsActivitySeparatorStyle">
-        <item name="android:layout_height">0.25dp</item>
-        <item name="android:background">@color/defaultTextColor</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:gravity">right</item>
-    </style>
-
-    <style name="DetailsActivityTextStyle">
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-    </style>
 
     <style name="YoutubeButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/Red_A700</item>

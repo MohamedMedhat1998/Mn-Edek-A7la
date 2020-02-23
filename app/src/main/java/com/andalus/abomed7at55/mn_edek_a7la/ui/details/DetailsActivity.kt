@@ -6,13 +6,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
-import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.STRING_RESOURCE
 import com.bumptech.glide.Glide

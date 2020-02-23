@@ -66,7 +66,7 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
     }
 
     private fun List<PreviewRecipe>.filterData(category: String): List<PreviewRecipe> {
-        return this.filter { previewRecipe -> previewRecipe.category.contains(category) }.takeLast(Constants.PREVIEW_LIMIT)
+        return this.filter { previewRecipe -> previewRecipe.category.contains(category) }.take(Constants.PREVIEW_LIMIT)
     }
 
     fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean {

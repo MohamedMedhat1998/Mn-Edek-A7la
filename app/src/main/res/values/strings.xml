@@ -1,14 +1,9 @@
 <resources>
     <string name="app_name">من ايدك أحلى</string>
     <string name="app_logo_cd">App Logo</string>
-    <string name="splash_screen_cd">Splash Screen</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="meat">لحوم</string>
     <string name="fish">أسماك</string>
@@ -19,20 +14,14 @@
     <string name="idea">أفكار وتدابير</string>
     <string name="diet">دايت</string>
     <string name="bakery">مخبوزات</string>
-    <string name="milk">ألبان</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="milk">منتجات البان</string>
     <string name="ingredients">المقادير:</string>
     <string name="steps">الخطوات:</string>
     <string name="search">بحث…</string>
     <string name="favorite">المفضلة</string>
     <string name="watch_video">مشاهدة الفيديو</string>
-    <string name="recent">المضاف حديثاً</string>
     <string name="view_all">عرض الكل</string>
 
-    <string name="tagsPlaceholder">%s &#xf02c;</string>
-
-    <string name="FakeIngredients">نصف كيلو دقيق مخبوزات أو متعدد الاغراض (دقيق قوي)\nنصف ملعقة صغيرة ملح\n2 ملعقة كبيرة سكر\nملعقة كبيرة زيت\nماء للعجن حسب حاجة العجين\n150 جرام زبدة نباتى او زبدة خليط لفرد العجين لينة بدرجة حرارة الغرفة\nقليل من الدقيق لفرد العجين\nقليل من الزيت لفرد العجين فى المرة الثانية</string>
-    <string name="FakeSteps">1- نضيف الملح والسكر والزيت للدقيق ويقلب جيدا\n2- يتم العجن بالماء حتى نحصل على عجينة متماسكة ولينة الى حد ما ولا تلتصق باليد\n3- ندهن العجينة بقليل من الزيت ونضعها في اناء مدهون بقليل من الزيت ونغطيها بكيس بلاستيك او بلاستيك فيلم\n4- نترك العجينة ترتاح لمدة طويلة (من ساعتين الى اربع ساعات) حتى يسهل فردها\n5- نفرد العجينة على قليل من الدقيق ونفرد عليها الزبدة اللينة بالتساوي\n6- نلف العجينة مثل السويسرول مع اخراج الهواء مع غلق الاطراف جيدا\n7- نقسم العجينة الى فطائر صغيرة\n8- نلف الفطائر في اكياس بلاستيك ونتركها ترتاح لمدة نصف ساعة\n9- ندهن الرخامة بقليل من الزيت ونفرد عليها الفطائر مع مراعاة عدم قطع العجين\n10- نطبق الفطائر على هيئة مربع ثم نكورها\n11- نترك الفطائر ترتاح لمدة نصف ساعة اخرى حتى يسهل فردها\n12- نفرد كل فطيرة في صينية مدهونة بقليل من الزيت\n13- نترك الفطيرة ترتاح لمدة 10 دقائق للمرة الاخيرة قبل التسوية\n14- نسوي الفطائر في فرن حار مسخن من قبل على ارضية الفرن حتى ترتفع ثم توضع على الشبكة تحت الشواية حتى يحمر لونها\n15- نخرجها من الفرن ونضع عليها قليل من الزبد السائل او السمن البلدي السائل\n16- نغطيها  بطبق غويط حتى نحصل على فطائر طري</string>
     <string name="tags_icon"></string>
     <string name="add_to_favorite">اضافة الى المفضلة</string>
     <string name="add_to_later">اضافة الى المشاهدة لاحقاً</string>

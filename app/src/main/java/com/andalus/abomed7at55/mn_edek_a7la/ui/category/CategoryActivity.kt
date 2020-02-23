@@ -3,7 +3,6 @@ package com.andalus.abomed7at55.mn_edek_a7la.ui.category
 import android.content.Intent
 import android.os.Bundle
 import android.widget.PopupMenu
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity

@@ -12,7 +12,6 @@ import com.andalus.abomed7at55.mn_edek_a7la.ui.main.MainActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants.ACTION_DATABASE_SERVICE_COMPLETE
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 //private const val DELAY = 1500

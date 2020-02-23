@@ -2,27 +2,17 @@
 <resources>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="defaultTextColor">#808080</color>
 
-    <color name="Transparent">#00ffffff</color>
     <color name="White">#ffffff</color>
 
     <color name="TagBackground">#F0F0F0</color>
     <color name="Separator">#70F50057</color>
 
-    <color name="Black_Transparent">#61000000</color>
     <color name="Black">#000000</color>
 
     <color name="Grey100">#F5F5F5</color>
 
 
-    <color name="Deep_Purple_50">#EDE7F6</color>
-    <color name="Deep_Purple_100">#D1C4E9</color>
-    <color name="Deep_Purple_300">#9575CD</color>
-    <color name="Deep_Purple_400">#7E57C2</color>
-    <color name="Deep_Purple_700">#512DA8</color>
-    <color name="Deep_Purple_800">#4527A0</color>
-    <color name="Deep_Purple_900">#311B92</color>
 
     <color name="Red_A700">#D50000</color>
 
