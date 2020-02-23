@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         rvCategories.layoutManager = LinearLayoutManager(this)
-        rvCategories.setItemViewCacheSize(11)
         rvCategories.adapter = categoriesAdapter
 
         mainViewModel.categories.observe(this, Observer {
