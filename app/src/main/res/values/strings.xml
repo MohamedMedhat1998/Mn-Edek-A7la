@@ -40,6 +40,10 @@
     <string name="no_saved_items">لا يوجد عناصر محفوظة</string>
     <string name="no_search_results">لم يتم العثور على نتائج البحث</string>
     <string name="search_result_for">نتائج البحث عن: %s</string>
+    <string name="review">تقييم</string>
+    <string name="share">مشاركة</string>
+    <string name="more">المزيد</string>
+    <string name="share_message">حمل الآن تطبيق من ايدك احلى\n%s</string>
 
 
 </resources>

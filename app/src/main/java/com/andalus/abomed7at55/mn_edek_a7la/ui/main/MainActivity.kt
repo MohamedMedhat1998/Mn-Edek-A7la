@@ -1,5 +1,6 @@
 package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 const val CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
 
@@ -69,6 +71,22 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_facebook_group -> startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse(Constants.FACEBOOK_GROUP_LINK)
+                })
+                R.id.nav_review -> try {
+                    startActivity(Intent().apply {
+                        action = Intent.ACTION_VIEW
+                        data = Uri.parse(Constants.REVIEW_LINK)
+                    })
+                } catch (e: Exception) {
+                    startActivity(Intent().apply {
+                        action = Intent.ACTION_VIEW
+                        data = Uri.parse(Constants.APP_LINK)
+                    })
+                }
+                R.id.nav_share -> startActivity(Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message,Constants.APP_LINK))
+                    type = "text/plain"
                 })
             }
             true

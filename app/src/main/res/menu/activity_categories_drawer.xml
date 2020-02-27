@@ -27,5 +27,17 @@
                 app:actionLayout="@layout/action_layout_facebook_group" />
         </menu>
     </item>
+    <item android:title="@string/more">
+        <menu>
+            <item
+                android:id="@+id/nav_review"
+                android:title=""
+                app:actionLayout="@layout/action_layout_review" />
+            <item
+                android:id="@+id/nav_share"
+                android:title=""
+                app:actionLayout="@layout/action_layout_share" />
+        </menu>
+    </item>
 
 </menu>
