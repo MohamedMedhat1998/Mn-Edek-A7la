@@ -3,6 +3,7 @@ package com.andalus.abomed7at55.mn_edek_a7la.data
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
 import com.andalus.abomed7at55.mn_edek_a7la.model.Recipe
@@ -28,10 +29,10 @@ interface RecipeDao {
     @Query("SELECT id,title,category,photo_link FROM Recipe WHERE title LIKE :keyword ORDER BY id DESC")
     fun searchForRecipe(keyword: String): LiveData<List<PreviewRecipe>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(recipe: Recipe)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(recipes: List<Recipe>)
 
     @Query("SELECT MAX(id) FROM Recipe")
