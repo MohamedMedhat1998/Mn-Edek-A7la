@@ -38,4 +38,7 @@ interface RecipeDao {
     @Query("SELECT MAX(id) FROM Recipe")
     fun getLastId(): LiveData<Int>
 
+    @Query("SELECT * FROM Recipe ORDER BY id DESC LIMIT 10")
+    fun getLocalRecent(): LiveData<List<Recipe>>
+
 }

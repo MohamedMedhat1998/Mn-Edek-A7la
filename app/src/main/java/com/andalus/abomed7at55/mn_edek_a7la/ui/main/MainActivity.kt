@@ -1,10 +1,11 @@
 package com.andalus.abomed7at55.mn_edek_a7la.ui.main
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -19,6 +20,7 @@ import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterActivity
+import com.andalus.abomed7at55.mn_edek_a7la.ui.recent.RecentFragment
 import com.andalus.abomed7at55.mn_edek_a7la.ui.search.SearchActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 import com.google.android.gms.ads.AdRequest
@@ -26,8 +28,8 @@ import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 const val CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
 
@@ -38,18 +40,53 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var categoriesAdapter: CategoriesAdapter
 
-    private val networkStateReceiver = NetworkStateReceiver()
+    private val networkStateReceiver: NetworkStateReceiver by inject()
+
+    private var connected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        networkStateReceiver.onNetworkStateReceive = {
+            connected = it
+            mainViewModel.setNetworkingState(it)
+        }
+
         registerReceiver(networkStateReceiver, IntentFilter(CONNECTIVITY_ACTION))
 
+
+        setupAds()
+
+        setupNavigationDrawer()
+
+        setupSearchBar()
+
+        setupCategories()
+
+        setupRecentRecipes()
+
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START)
+        else
+            super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(networkStateReceiver)
+        super.onDestroy()
+    }
+
+    private fun setupAds() {
         MobileAds.initialize(applicationContext, getString(R.string.ADMOB_APP_ID))
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+    }
 
+    private fun setupNavigationDrawer() {
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -85,20 +122,24 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_share -> startActivity(Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message,Constants.APP_LINK))
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, Constants.APP_LINK))
                     type = "text/plain"
                 })
             }
             true
         }
+    }
 
+    private fun setupSearchBar() {
         ibSearch.setOnClickListener {
             if (etSearch.text.toString() == "")
                 Toast.makeText(this, getString(R.string.please_enter_keyword), Toast.LENGTH_LONG).show()
             else
                 startActivity(Intent(this, SearchActivity::class.java).apply { putExtra(Constants.SEARCH_KEYWORD, etSearch.text.toString()) })
         }
+    }
 
+    private fun setupCategories() {
         categoriesAdapter = CategoriesAdapter(
                 onCategoryClicked = {
                     startActivity(Intent(this, CategoryActivity::class.java).apply { putExtra(Constants.CATEGORY_KEY, it) })
@@ -137,19 +178,22 @@ class MainActivity : AppCompatActivity() {
             categoriesAdapter.data = it
             categoriesAdapter.notifyDataSetChanged()
         })
-
     }
 
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START)
-        else
-            super.onBackPressed()
-    }
+    private fun setupRecentRecipes() {
+        val recentFragment = RecentFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.frameRecentPlaceholder, recentFragment).commit()
 
-    override fun onDestroy() {
-        unregisterReceiver(networkStateReceiver)
-        super.onDestroy()
+        mainViewModel.isConnected.observe(this, Observer {
+            recentFragment.setConnectionState(it)
+        })
+
+        mainViewModel.recent.observe(this, Observer {
+            if(it.isNotEmpty()){
+                recentFragment.setData(it)
+            }
+        })
+
     }
 
 }

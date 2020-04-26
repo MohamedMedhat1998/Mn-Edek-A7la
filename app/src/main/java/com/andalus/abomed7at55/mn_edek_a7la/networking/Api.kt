@@ -7,4 +7,6 @@ interface Api {
 
     fun getUpdates(id: Int): LiveData<List<Recipe>>
 
+    fun getRecentRecipes(): LiveData<List<Recipe>>
+
 }

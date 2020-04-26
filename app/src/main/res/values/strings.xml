@@ -44,6 +44,10 @@
     <string name="share">مشاركة</string>
     <string name="more">المزيد</string>
     <string name="share_message">حمل الآن تطبيق من ايدك احلى\n%s</string>
+    <string name="recent">المضاف حديثاً</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالانترنت</string>
+    <string name="updating">جاري التحديث …</string>
+    <string name="successfully_updated">تم تحديث الوصفات بنجاح</string>
 
 
 </resources>

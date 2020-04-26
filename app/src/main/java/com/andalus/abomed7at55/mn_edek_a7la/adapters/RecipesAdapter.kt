@@ -20,7 +20,7 @@ class RecipesAdapter(
         var data: List<PreviewRecipe> = listOf(),
         var size: String = SIZE_SMALL,
         var onClick: (id: Int) -> Unit = {},
-        var onOptionsClicked: (id: Int, optionsButton: View) -> Unit
+        var onOptionsClicked: (id: Int, optionsButton: View) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<RecipesAdapter.RecipeHolder>() {
 
     private lateinit var context: Context

@@ -47,4 +47,8 @@ class LocalRecipeRepository(private val dao: RecipeDao, private val prefsManager
         return dao.getLastId()
     }
 
+    override fun getLocalRecent(): LiveData<List<Recipe>> {
+        return dao.getLocalRecent()
+    }
+
 }

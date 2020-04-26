@@ -22,5 +22,6 @@ data class Recipe(@ColumnInfo(name = COLUMN_ID) @PrimaryKey val id: Int,
 
     fun toFavoriteRecipe() = FavoriteRecipe(id, title, ingredients, steps, category, photoLink, videoLink)
     fun toLaterRecipe() = LaterRecipe(id, title, ingredients, steps, category, photoLink, videoLink)
+    fun toPreviewRecipe() = PreviewRecipe(id, title, category, photoLink)
 
 }

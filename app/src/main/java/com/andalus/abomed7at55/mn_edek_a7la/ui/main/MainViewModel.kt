@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModel
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.model.Category
 import com.andalus.abomed7at55.mn_edek_a7la.model.PreviewRecipe
+import com.andalus.abomed7at55.mn_edek_a7la.networking.Api
 import com.andalus.abomed7at55.mn_edek_a7la.repositories.recipe.RecipeRepository
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
 
 
-class MainViewModel(private val recipeRepository: RecipeRepository, context: Context) : ViewModel() {
+class MainViewModel(private val recipeRepository: RecipeRepository, context: Context, private val api: Api) : ViewModel() {
 
     private val dumb = MutableLiveData<Int>()
     private val recipes = switchMap(dumb) {
@@ -33,7 +34,15 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
     private val milk = Category(context.getString(R.string.milk), R.drawable.milk_bottle_icon, tag = Constants.MILK)
 
     //TODO implement recent recipes
-    /*val recent = Category(context.getString(R.string.recent), R.drawable.nav_recent, mutableListOf())*/
+    val isConnected = MutableLiveData<Boolean>()
+    var recent = switchMap(isConnected) {
+        if (it)
+            api.getRecentRecipes()
+        else
+            recipeRepository.getLocalRecent()
+    }
+
+
     init {
         categories.addSource(recipes) {
             meat.data = it.filterData(meat.tag)
@@ -75,6 +84,10 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
 
     fun setLaterRecipe(id: Int, isLater: Boolean): Boolean {
         return recipeRepository.setLaterRecipe(id, isLater)
+    }
+
+    fun setNetworkingState(connectionState: Boolean) {
+        isConnected.value = connectionState
     }
 
 }

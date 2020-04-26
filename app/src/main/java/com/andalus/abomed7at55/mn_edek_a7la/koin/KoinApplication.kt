@@ -3,6 +3,7 @@ package com.andalus.abomed7at55.mn_edek_a7la.koin
 import android.app.Application
 import androidx.multidex.MultiDexApplication
 import androidx.room.Room
+import com.andalus.abomed7at55.mn_edek_a7la.broadcast_receivers.NetworkStateReceiver
 import com.andalus.abomed7at55.mn_edek_a7la.data.AppDatabase
 import com.andalus.abomed7at55.mn_edek_a7la.data.FavoriteDao
 import com.andalus.abomed7at55.mn_edek_a7la.data.LaterDao
@@ -89,9 +90,11 @@ val koinModule = module {
 
     single { Networking(provideRetrofitClient()) as Api }
 
-    single { SynchronizerImpl(get(),get()) as Synchronizer }
+    single { SynchronizerImpl(get(), get()) as Synchronizer }
 
-    viewModel { MainViewModel(get(), androidApplication()) }
+    single { NetworkStateReceiver() }
+
+    viewModel { MainViewModel(get(), androidApplication(), get()) }
 
     viewModel { DetailsViewModel(get(), get()) }
 

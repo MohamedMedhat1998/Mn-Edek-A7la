@@ -24,4 +24,6 @@ interface RecipeRepository {
 
     fun getLastId(): LiveData<Int>
 
+    fun getLocalRecent(): LiveData<List<Recipe>>
+
 }

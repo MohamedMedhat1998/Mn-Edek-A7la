@@ -9,7 +9,6 @@ import kotlin.coroutines.CoroutineContext
 
 class SynchronizerImpl(private val api: Api, private val repository: RecipeRepository) : Synchronizer, CoroutineScope {
 
-
     override fun sync() {
         repository.getLastId().observeForever { id ->
             api.getUpdates(id).observeForever { data ->
