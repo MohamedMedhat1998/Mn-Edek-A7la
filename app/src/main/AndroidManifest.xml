@@ -43,7 +43,8 @@
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_categories"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
 
         <service android:name=".services.FileManagerService" />
         <service android:name=".services.SynchronizationService" />

@@ -12,11 +12,6 @@
         <item name="colorPrimaryDark">@color/PinkA700</item>
     </style>
 
-    <style name="SplashScreenLogoStyle">
-        <item name="android:layout_width">@dimen/splash_screen_logo_dim</item>
-        <item name="android:layout_height">@dimen/splash_screen_logo_dim</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

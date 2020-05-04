@@ -35,13 +35,7 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
     private val milk = Category(context.getString(R.string.milk), tag = Constants.MILK)
 
     //TODO implement recent recipes
-    val isConnected = MutableLiveData<Boolean>()
-    var recentLiveData = switchMap(isConnected) {
-        if (it)
-            api.getRecentRecipes()
-        else
-            recipeRepository.getLocalRecent()
-    }
+    private val isConnected = MutableLiveData<Boolean>()
 
 
     init {

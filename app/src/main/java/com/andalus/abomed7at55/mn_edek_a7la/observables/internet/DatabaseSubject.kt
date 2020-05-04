@@ -13,7 +13,7 @@ class DatabaseSubject private constructor() : Observable<DatabaseState> {
         private var databaseSubject: DatabaseSubject? = null
 
         @JvmStatic
-        public fun getInstance(): DatabaseSubject {
+        fun getInstance(): DatabaseSubject {
             if (databaseSubject == null) {
                 databaseSubject = DatabaseSubject()
             }

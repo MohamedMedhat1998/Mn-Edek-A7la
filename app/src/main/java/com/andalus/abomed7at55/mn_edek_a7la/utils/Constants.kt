@@ -44,9 +44,6 @@ object Constants {
     const val SOURCE_FAVORITE = "source-favorite"
     const val SEARCH_KEYWORD = "search-keyword"
 
-    //Preview
-    const val PREVIEW_LIMIT = 8
-
     //others
     const val STRING_RESOURCE = "string"
 

@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 
 
-class FontAwesomeTextView : TextView {
+class FontAwesomeTextView : androidx.appcompat.widget.AppCompatTextView {
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         init()
