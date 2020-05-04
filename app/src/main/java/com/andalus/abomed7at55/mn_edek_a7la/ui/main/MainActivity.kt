@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
@@ -16,25 +17,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.andalus.abomed7at55.mn_edek_a7la.R
 import com.andalus.abomed7at55.mn_edek_a7la.adapters.CategoriesAdapter
 import com.andalus.abomed7at55.mn_edek_a7la.broadcast_receivers.NetworkStateReceiver
+import com.andalus.abomed7at55.mn_edek_a7la.observables.internet.DatabaseState
+import com.andalus.abomed7at55.mn_edek_a7la.observables.internet.DatabaseSubject
 import com.andalus.abomed7at55.mn_edek_a7la.ui.category.CategoryActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.details.DetailsActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.favorite.FavoriteActivity
 import com.andalus.abomed7at55.mn_edek_a7la.ui.later.LaterActivity
-import com.andalus.abomed7at55.mn_edek_a7la.ui.recent.RecentFragment
 import com.andalus.abomed7at55.mn_edek_a7la.ui.search.SearchActivity
 import com.andalus.abomed7at55.mn_edek_a7la.utils.Constants
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 const val CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
 
 //TODO fix api levels below 21
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), com.andalus.abomed7at55.mn_edek_a7la.observables.Observer<DatabaseState> {
 
     private val mainViewModel: MainViewModel by viewModel()
 
@@ -43,6 +49,8 @@ class MainActivity : AppCompatActivity() {
     private val networkStateReceiver: NetworkStateReceiver by inject()
 
     private var connected = false
+
+    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +62,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerReceiver(networkStateReceiver, IntentFilter(CONNECTIVITY_ACTION))
+        DatabaseSubject.getInstance().registerObserver(this)
 
-
-        setupAds()
+        Handler().postDelayed({
+            setupAds()
+        }, 500)
 
         setupNavigationDrawer()
 
@@ -64,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         setupCategories()
 
-        setupRecentRecipes()
+        //setupRecentRecipes()
 
     }
 
@@ -77,11 +87,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         unregisterReceiver(networkStateReceiver)
+        DatabaseSubject.getInstance().removeObserver(this)
         super.onDestroy()
     }
 
     private fun setupAds() {
-        MobileAds.initialize(applicationContext, getString(R.string.ADMOB_APP_ID))
+        MobileAds.initialize(applicationContext) {
+
+        }
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
     }
@@ -92,6 +105,18 @@ class MainActivity : AppCompatActivity() {
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        Glide.with(this)
+                .load(R.drawable.logo_white)
+                .apply(RequestOptions.circleCropTransform())
+                .into(nav_view.getHeaderView(0).ivLogoHeader)
+
+        nav_view.getHeaderView(0).ivLogoHeader.setOnClickListener {
+            startActivity(Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(Constants.YOUTUBE_SUBSCRIPTION_LINK)
+            })
+        }
 
         nav_view.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -180,20 +205,38 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupRecentRecipes() {
-        val recentFragment = RecentFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.frameRecentPlaceholder, recentFragment).commit()
-
-        mainViewModel.isConnected.observe(this, Observer {
-            recentFragment.setConnectionState(it)
-        })
-
-        mainViewModel.recent.observe(this, Observer {
-            if(it.isNotEmpty()){
-                recentFragment.setData(it)
+    override fun update(t: DatabaseState) {
+        when (t) {
+            DatabaseState.Offline -> {
+                dataStatusBar.animate().translationY(0f)
+                tvNoInternet.visibility = View.VISIBLE
+                tvSuccessfullyUpdated.visibility = View.INVISIBLE
+                tvUpdating.visibility = View.INVISIBLE
+                pbLoading.visibility = View.INVISIBLE
+                handler.postDelayed({
+                    dataStatusBar.animate().translationY(-tvSuccessfullyUpdated.height.toFloat())
+                }, 3000)
             }
-        })
-
+            DatabaseState.Updating -> {
+                dataStatusBar.animate().translationY(0f)
+                tvNoInternet.visibility = View.INVISIBLE
+                tvSuccessfullyUpdated.visibility = View.INVISIBLE
+                tvUpdating.visibility = View.VISIBLE
+                pbLoading.visibility = View.VISIBLE
+            }
+            DatabaseState.UpToDate -> {
+                dataStatusBar.animate().translationY(0f)
+                tvNoInternet.visibility = View.INVISIBLE
+                tvSuccessfullyUpdated.visibility = View.VISIBLE
+                tvUpdating.visibility = View.INVISIBLE
+                pbLoading.visibility = View.INVISIBLE
+                handler.postDelayed({
+                    dataStatusBar.animate().translationY(-tvSuccessfullyUpdated.height.toFloat())
+                }, 3000)
+                Toast.makeText(this, getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show()
+            }
+        }
+        Log.d("DATABASE STATE", t.toString())
     }
 
 }

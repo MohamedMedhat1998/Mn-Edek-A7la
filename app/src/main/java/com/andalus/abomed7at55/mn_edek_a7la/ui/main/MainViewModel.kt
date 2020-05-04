@@ -22,20 +22,21 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
 
     val categories = MediatorLiveData<List<Category>>()
 
-    private val meat = Category(context.getString(R.string.meat), R.drawable.chicken_hot_icon, tag = Constants.MEAT)
-    private val fish = Category(context.getString(R.string.fish), R.drawable.fish_icon, tag = Constants.FISH)
-    private val sweet = Category(context.getString(R.string.sweet), R.drawable.cake_icon, tag = Constants.SWEET)
-    private val drink = Category(context.getString(R.string.drink), R.drawable.juice_icon, tag = Constants.DRINK)
-    private val starches = Category(context.getString(R.string.starches), R.drawable.rice_icon, tag = Constants.STARCHES)
-    private val appetizer = Category(context.getString(R.string.appetizer), R.drawable.snack_icon, tag = Constants.APPETIZER)
-    private val idea = Category(context.getString(R.string.idea), R.drawable.ligh_bulb_icon, tag = Constants.IDEA)
-    private val diet = Category(context.getString(R.string.diet), R.drawable.diet_icon, tag = Constants.DIET)
-    private val bakery = Category(context.getString(R.string.bakery), R.drawable.bread_icon, tag = Constants.BAKERY)
-    private val milk = Category(context.getString(R.string.milk), R.drawable.milk_bottle_icon, tag = Constants.MILK)
+    private val recent = Category(context.getString(R.string.recent), tag = Constants.RECENT)
+    private val meat = Category(context.getString(R.string.meat), tag = Constants.MEAT)
+    private val fish = Category(context.getString(R.string.fish), tag = Constants.FISH)
+    private val sweet = Category(context.getString(R.string.sweet), tag = Constants.SWEET)
+    private val drink = Category(context.getString(R.string.drink), tag = Constants.DRINK)
+    private val starches = Category(context.getString(R.string.starches), tag = Constants.STARCHES)
+    private val appetizer = Category(context.getString(R.string.appetizer), tag = Constants.APPETIZER)
+    private val idea = Category(context.getString(R.string.idea), tag = Constants.IDEA)
+    private val diet = Category(context.getString(R.string.diet), tag = Constants.DIET)
+    private val bakery = Category(context.getString(R.string.bakery), tag = Constants.BAKERY)
+    private val milk = Category(context.getString(R.string.milk), tag = Constants.MILK)
 
     //TODO implement recent recipes
     val isConnected = MutableLiveData<Boolean>()
-    var recent = switchMap(isConnected) {
+    var recentLiveData = switchMap(isConnected) {
         if (it)
             api.getRecentRecipes()
         else
@@ -45,6 +46,7 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
 
     init {
         categories.addSource(recipes) {
+            recent.data = it.take(10)
             meat.data = it.filterData(meat.tag)
             fish.data = it.filterData(fish.tag)
             sweet.data = it.filterData(sweet.tag)
@@ -57,6 +59,7 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
             milk.data = it.filterData(milk.tag)
 
             val data: MutableList<Category> = mutableListOf()
+            data.add(recent)
             data.add(meat)
             data.add(fish)
             data.add(sweet)
@@ -75,7 +78,7 @@ class MainViewModel(private val recipeRepository: RecipeRepository, context: Con
     }
 
     private fun List<PreviewRecipe>.filterData(category: String): List<PreviewRecipe> {
-        return this.filter { previewRecipe -> previewRecipe.category.contains(category) }.take(Constants.PREVIEW_LIMIT)
+        return this.filter { previewRecipe -> previewRecipe.category.contains(category) }
     }
 
     fun setFavoriteRecipe(id: Int, isFavorite: Boolean): Boolean {

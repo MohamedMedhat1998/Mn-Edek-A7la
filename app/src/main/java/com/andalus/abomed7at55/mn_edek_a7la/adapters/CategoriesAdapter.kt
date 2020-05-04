@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -29,6 +30,10 @@ class CategoriesAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
+        if (data[position].title == context.getString(R.string.recent)) {
+            holder.btnViewAll.visibility = View.INVISIBLE
+        }
+
         holder.tvCategoryName.text = data[position].title
 
         data[position].recipesAdapter.onClick = {
@@ -50,13 +55,14 @@ class CategoriesAdapter(
     inner class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvCategoryName: TextView = itemView.tvCategoryName
         val rvRecipes: RecyclerView = itemView.rvRecipes
+        val btnViewAll: Button = itemView.btnViewAll
 
         init {
             rvRecipes.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, true)
             rvRecipes.onFlingListener = null
             val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(rvRecipes)
-            itemView.btnViewAll.setOnClickListener {
+            btnViewAll.setOnClickListener {
                 onCategoryClicked.invoke(data[adapterPosition].tag)
             }
         }

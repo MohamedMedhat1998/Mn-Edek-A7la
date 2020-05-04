@@ -17,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         //TODO update this value when you push new records to the local database before releasing update
-        const val NEW_VERSION = 1
-        var currentVersion = 0
+        const val NEW_VERSION = 2
+        var currentVersion = 1
     }
 }

@@ -17,6 +17,7 @@ object Constants {
 
     //Categories
     const val CATEGORY_KEY = "category"
+    const val RECENT = "recent"
     const val MEAT = "meat"
     const val FISH = "fish"
     const val SWEET = "sweet"
